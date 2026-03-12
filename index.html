@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gorupa — Open Source Projects</title>
+    <meta name="description" content="Free, open source projects by gorupa — privacy-first browser tools and student resources.">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <style>
+
+        /* ── Variables ── */
+        :root {
+            --bg:         #0c0e10;
+            --surface:    #13161a;
+            --surface-2:  #1a1e24;
+            --border:     rgba(255,255,255,0.07);
+            --border-hover: rgba(255,255,255,0.14);
+            --text:       #f0f2f5;
+            --text-muted: #7a8491;
+            --text-dim:   #4a5260;
+            --blue:       #1a73e8;
+            --blue-light: #4d9bf5;
+            --orange:     #e8410a;
+            --orange-light: #ff7043;
+            --green:       #1e8e3e;
+            --green-light: #34a85a;
+            --radius:     20px;
+            --radius-sm:  12px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ── Noise texture overlay ── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        /* ── Background glow blobs ── */
+        .glow-blue {
+            position: fixed;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(26,115,232,0.12) 0%, transparent 70%);
+            top: -200px; left: -150px;
+            pointer-events: none;
+            z-index: 0;
+            animation: drift-blue 18s ease-in-out infinite alternate;
+        }
+        .glow-orange {
+            position: fixed;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(232,65,10,0.09) 0%, transparent 70%);
+            bottom: -150px; right: -100px;
+            pointer-events: none;
+            z-index: 0;
+            animation: drift-orange 22s ease-in-out infinite alternate;
+        }
+
+        .glow-green {
+            position: fixed;
+            width: 450px; height: 450px;
+            background: radial-gradient(circle, rgba(30,142,62,0.07) 0%, transparent 70%);
+            top: 50%; left: -150px;
+            pointer-events: none;
+            z-index: 0;
+            animation: drift-blue 25s ease-in-out infinite alternate;
+        }
+
+        @keyframes drift-blue {
+            from { transform: translate(0, 0) scale(1); }
+            to   { transform: translate(60px, 80px) scale(1.15); }
+        }
+        @keyframes drift-orange {
+            from { transform: translate(0, 0) scale(1); }
+            to   { transform: translate(-50px, -60px) scale(1.1); }
+        }
+
+        /* ── Animations ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+        @keyframes shimmer {
+            0%   { background-position: -400px 0; }
+            100% { background-position: 400px 0; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50%       { transform: translateY(-6px); }
+        }
+        @keyframes spin-slow {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ── Page wrapper ── */
+        .page {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 24px 100px;
+        }
+
+        /* ── Nav ── */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 100px;
+            animation: fadeIn 0.6s ease both;
+        }
+        .nav-logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-logo-dot {
+            width: 8px; height: 8px;
+            background: var(--blue);
+            border-radius: 50%;
+            animation: float 2.5s ease-in-out infinite;
+        }
+        .nav-github {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 7px 14px;
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            background: var(--surface);
+            transition: all 0.2s ease;
+        }
+        .nav-github:hover {
+            color: var(--text);
+            border-color: var(--border-hover);
+            background: var(--surface-2);
+        }
+        .nav-github svg { width: 15px; height: 15px; fill: currentColor; }
+
+        /* ── Hero ── */
+        .hero {
+            margin-bottom: 80px;
+            animation: fadeUp 0.7s ease 0.1s both;
+        }
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--blue-light);
+            background: rgba(26,115,232,0.1);
+            border: 1px solid rgba(26,115,232,0.2);
+            padding: 5px 14px;
+            border-radius: 100px;
+            margin-bottom: 28px;
+        }
+        .hero-tag .material-icons-round { font-size: 14px; }
+
+        .hero h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.4rem, 6vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+            margin-bottom: 22px;
+        }
+        .hero h1 .line-2 {
+            background: linear-gradient(90deg, var(--blue-light) 0%, #7fb3ff 50%, var(--orange-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% auto;
+            animation: shimmer 4s linear infinite;
+        }
+
+        .hero-desc {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            max-width: 520px;
+            margin-bottom: 36px;
+        }
+
+        /* ── Stats row ── */
+        .stats-row {
+            display: flex;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+        .stat {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .stat-num {
+            font-family: 'DM Mono', monospace;
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+        .stat-lbl {
+            font-size: 0.72rem;
+            color: var(--text-dim);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+        .stat-divider {
+            width: 1px;
+            background: var(--border);
+            align-self: stretch;
+        }
+
+        /* ── Section label ── */
+        .section-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* ── Tool Cards ── */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 18px;
+            margin-bottom: 70px;
+        }
+
+        .tool-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeUp 0.6s ease both;
+        }
+        .tool-card:nth-child(1) { animation-delay: 0.15s; }
+        .tool-card:nth-child(2) { animation-delay: 0.25s; }
+        .tool-card:nth-child(3) { animation-delay: 0.35s; }
+        .tool-card:nth-child(4) { animation-delay: 0.45s; }
+
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: var(--radius);
+        }
+        .tool-card.blue::before  { background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(26,115,232,0.07) 0%, transparent 70%); }
+        .tool-card.orange::before { background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(232,65,10,0.07) 0%, transparent 70%); }
+
+        .tool-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 48px rgba(0,0,0,0.4);
+        }
+        .tool-card:hover::before { opacity: 1; }
+
+        /* top row inside card */
+        .card-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .card-icon-wrap {
+            width: 52px; height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .card-icon-wrap.blue   { background: rgba(26,115,232,0.12); }
+        .card-icon-wrap.orange { background: rgba(232,65,10,0.12); }
+        .card-icon-wrap .material-icons-round {
+            font-size: 26px;
+        }
+        .card-icon-wrap.blue   .material-icons-round { color: var(--blue-light); }
+        .card-icon-wrap.orange .material-icons-round { color: var(--orange-light); }
+
+        .card-arrow {
+            color: var(--text-dim);
+            font-size: 20px;
+            transition: all 0.2s ease;
+        }
+        .tool-card:hover .card-arrow {
+            color: var(--text-muted);
+            transform: translate(3px, -3px);
+        }
+
+        .card-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+        .card-desc {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 24px;
+            flex: 1;
+        }
+
+        /* tag row */
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 22px;
+        }
+        .tag {
+            font-size: 0.68rem;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 100px;
+            font-family: 'DM Mono', monospace;
+            letter-spacing: 0.2px;
+        }
+        .tag-blue   { background: rgba(26,115,232,0.12); color: var(--blue-light); border: 1px solid rgba(26,115,232,0.2); }
+        .tag-orange { background: rgba(232,65,10,0.12);  color: var(--orange-light); border: 1px solid rgba(232,65,10,0.2); }
+        .tag-neutral { background: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px solid var(--border); }
+
+        /* bottom links */
+        .card-links {
+            display: flex;
+            gap: 10px;
+            border-top: 1px solid var(--border);
+            padding-top: 18px;
+        }
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            background: var(--surface-2);
+            transition: all 0.15s ease;
+        }
+        .card-link .material-icons-round { font-size: 14px; }
+        .card-link:hover { border-color: var(--border-hover); color: var(--text); }
+        .card-link.primary-blue {
+            background: rgba(26,115,232,0.12);
+            border-color: rgba(26,115,232,0.25);
+            color: var(--blue-light);
+        }
+        .card-link.primary-blue:hover {
+            background: rgba(26,115,232,0.2);
+            border-color: rgba(26,115,232,0.4);
+            color: #7fb3ff;
+        }
+        .card-link.primary-orange {
+            background: rgba(232,65,10,0.12);
+            border-color: rgba(232,65,10,0.25);
+            color: var(--orange-light);
+        }
+        .card-link.primary-orange:hover {
+            background: rgba(232,65,10,0.2);
+            border-color: rgba(232,65,10,0.4);
+            color: #ff8a65;
+        }
+        .card-icon-wrap.green   { background: rgba(30,142,62,0.12); }
+        .card-icon-wrap.green   .material-icons-round { color: #34a85a; }
+        .tag-green { background: rgba(30,142,62,0.12); color: #34a85a; border: 1px solid rgba(30,142,62,0.2); }
+        .card-link.primary-green {
+            background: rgba(30,142,62,0.12);
+            border-color: rgba(30,142,62,0.25);
+            color: #34a85a;
+        }
+        .card-link.primary-green:hover {
+            background: rgba(30,142,62,0.2);
+            border-color: rgba(30,142,62,0.4);
+            color: #4caf84;
+        }
+        .tool-card.green::before { background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(30,142,62,0.07) 0%, transparent 70%); }
+
+        /* ── Coming soon card ── */
+        .tool-card.coming-soon {
+            opacity: 0.5;
+            cursor: default;
+            pointer-events: none;
+        }
+        .coming-soon-badge {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            padding: 3px 9px;
+            border-radius: 100px;
+            font-family: 'DM Mono', monospace;
+        }
+
+        /* ── Values strip ── */
+        .values {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 70px;
+            animation: fadeUp 0.6s ease 0.4s both;
+        }
+        .value-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 10px 18px;
+            border-radius: 100px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            transition: all 0.15s;
+        }
+        .value-pill:hover { border-color: var(--border-hover); color: var(--text); }
+        .value-pill .material-icons-round { font-size: 16px; }
+        .value-pill.vp-blue   .material-icons-round { color: var(--blue-light); }
+        .value-pill.vp-green  .material-icons-round { color: #4caf84; }
+        .value-pill.vp-orange .material-icons-round { color: var(--orange-light); }
+        .value-pill.vp-purple .material-icons-round { color: #a78bfa; }
+
+        /* ── Footer ── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding-top: 36px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            animation: fadeUp 0.6s ease 0.5s both;
+        }
+        .footer-left {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            line-height: 1.8;
+        }
+        .footer-left a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.15s;
+        }
+        .footer-left a:hover { color: var(--text); }
+
+        .footer-right {
+            display: flex;
+            gap: 8px;
+        }
+        .footer-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 5px 11px;
+            border-radius: 100px;
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+            font-family: 'DM Mono', monospace;
+            letter-spacing: 0.3px;
+        }
+        .footer-badge .material-icons-round { font-size: 12px; }
+
+        /* ── Responsive ── */
+        @media (max-width: 600px) {
+            .page { padding: 48px 18px 72px; }
+            nav { margin-bottom: 64px; }
+            .hero { margin-bottom: 56px; }
+            .tools-grid { grid-template-columns: 1fr; }
+            .stats-row { gap: 18px; }
+            footer { flex-direction: column; align-items: flex-start; }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="glow-blue"></div>
+<div class="glow-orange"></div>
+<div class="glow-green"></div>
+
+<div class="page">
+
+    <!-- Nav -->
+    <nav>
+        <a class="nav-logo" href="#">
+            <span class="nav-logo-dot"></span>
+            gorupa
+        </a>
+        <a class="nav-github" href="https://github.com/gorupa" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+            </svg>
+            github.com/gorupa
+        </a>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-tag">
+            <span class="material-icons-round">code</span>
+            Open Source Projects
+        </div>
+        <h1>
+            Free tools that work<br>
+            <span class="line-2">entirely in your browser.</span>
+        </h1>
+        <p class="hero-desc">
+            Free, open source projects built for real people —
+            browser tools, student resources, and more.
+            No ads. No tracking. Always open source.
+        </p>
+        <div class="stats-row">
+            <div class="stat">
+                <span class="stat-num">3</span>
+                <span class="stat-lbl">Live Projects</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+                <span class="stat-num">0</span>
+                <span class="stat-lbl">Server Uploads</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+                <span class="stat-num">MIT</span>
+                <span class="stat-lbl">License</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat">
+                <span class="stat-num">0</span>
+                <span class="stat-lbl">Ads Ever</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools -->
+    <div class="section-label">Tools</div>
+
+    <div class="tools-grid">
+
+        <!-- Image Compressor -->
+        <div class="tool-card blue">
+            <div class="card-top">
+                <div class="card-icon-wrap blue">
+                    <span class="material-icons-round">compress</span>
+                </div>
+                <span class="material-icons-round card-arrow">arrow_outward</span>
+            </div>
+            <div class="card-name">Local Image Compressor</div>
+            <p class="card-desc">
+                Compress JPG &amp; PNG images instantly with live size preview.
+                Adjust quality with a slider and see the estimated output size
+                before you even compress.
+            </p>
+            <div class="card-tags">
+                <span class="tag tag-blue">JPG</span>
+                <span class="tag tag-blue">PNG</span>
+                <span class="tag tag-neutral">Canvas API</span>
+                <span class="tag tag-neutral">Live Preview</span>
+                <span class="tag tag-neutral">Drag &amp; Drop</span>
+            </div>
+            <div class="card-links">
+                <a class="card-link primary-blue" href="https://local-image-compressor.pages.dev/" target="_blank" rel="noopener">
+                    <span class="material-icons-round">open_in_new</span> Live Site
+                </a>
+                <a class="card-link" href="https://github.com/gorupa/local-image-compressor" target="_blank" rel="noopener">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                    Source Code
+                </a>
+            </div>
+        </div>
+
+        <!-- Image to PDF -->
+        <div class="tool-card orange">
+            <div class="card-top">
+                <div class="card-icon-wrap orange">
+                    <span class="material-icons-round">picture_as_pdf</span>
+                </div>
+                <span class="material-icons-round card-arrow">arrow_outward</span>
+            </div>
+            <div class="card-name">Image to PDF</div>
+            <p class="card-desc">
+                Convert multiple JPG, PNG &amp; WebP images into a single PDF.
+                Drag to reorder pages, choose A4 or Letter, set margins —
+                all processed locally using jsPDF.
+            </p>
+            <div class="card-tags">
+                <span class="tag tag-orange">JPG</span>
+                <span class="tag tag-orange">PNG</span>
+                <span class="tag tag-orange">WebP</span>
+                <span class="tag tag-neutral">jsPDF</span>
+                <span class="tag tag-neutral">Multi-Image</span>
+                <span class="tag tag-neutral">Drag to Sort</span>
+            </div>
+            <div class="card-links">
+                <a class="card-link primary-orange" href="https://image-to-pdf-afb.pages.dev/" target="_blank" rel="noopener">
+                    <span class="material-icons-round">open_in_new</span> Live Site
+                </a>
+                <a class="card-link" href="https://github.com/gorupa/image-to-pdf" target="_blank" rel="noopener">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                    Source Code
+                </a>
+            </div>
+        </div>
+
+        <!-- MLSU Study Resources -->
+        <div class="tool-card green">
+            <div class="card-top">
+                <div class="card-icon-wrap green">
+                    <span class="material-icons-round">menu_book</span>
+                </div>
+                <span class="material-icons-round card-arrow">arrow_outward</span>
+            </div>
+            <div class="card-name">MLSU Law Resources</div>
+            <p class="card-desc">
+                Free notes, syllabus &amp; past papers for
+                Mohan Lal Sukhadia University (MLSU) law students.
+                Filter by course, year, and subject — find exactly
+                what you need instantly.
+            </p>
+            <div class="card-tags">
+                <span class="tag tag-green">LLB</span>
+                <span class="tag tag-green">BA.LLB</span>
+                <span class="tag tag-neutral">Notes</span>
+                <span class="tag tag-neutral">Past Papers</span>
+                <span class="tag tag-neutral">Syllabus</span>
+                <span class="tag tag-neutral">University</span>
+            </div>
+            <div class="card-links">
+                <a class="card-link primary-green" href="https://mlsu-dhj.pages.dev/" target="_blank" rel="noopener">
+                    <span class="material-icons-round">open_in_new</span> Live Site
+                </a>
+                <a class="card-link" href="https://github.com/Gorupa/mlsu-" target="_blank" rel="noopener">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                    Source Code
+                </a>
+            </div>
+        </div>
+
+        <!-- Coming Soon -->
+        <div class="tool-card coming-soon">
+            <div class="card-top">
+                <div class="card-icon-wrap blue">
+                    <span class="material-icons-round">more_horiz</span>
+                </div>
+                <span class="coming-soon-badge">Coming Soon</span>
+            </div>
+            <div class="card-name">More Projects</div>
+            <p class="card-desc">
+                More open source projects are in the works.
+                All free, always open source, and ad-free — as always.
+            </p>
+            <div class="card-tags">
+                <span class="tag tag-neutral">Open Source</span>
+                <span class="tag tag-neutral">Ad-Free</span>
+                <span class="tag tag-neutral">100% Local</span>
+            </div>
+            <div class="card-links">
+                <a class="card-link" href="https://github.com/gorupa" target="_blank" rel="noopener">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                    Follow on GitHub
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Values -->
+    <div class="section-label">Principles</div>
+
+    <div class="values">
+        <span class="value-pill vp-blue">
+            <span class="material-icons-round">lock</span>
+            100% Local Processing
+        </span>
+        <span class="value-pill vp-green">
+            <span class="material-icons-round">block</span>
+            Zero Ads, Forever
+        </span>
+        <span class="value-pill vp-orange">
+            <span class="material-icons-round">code</span>
+            Always Open Source
+        </span>
+        <span class="value-pill vp-purple">
+            <span class="material-icons-round">gavel</span>
+            MIT Licensed
+        </span>
+        <span class="value-pill vp-blue">
+            <span class="material-icons-round">visibility_off</span>
+            No Tracking Ever
+        </span>
+        <span class="value-pill vp-green">
+            <span class="material-icons-round">public</span>
+            Free for Everyone
+        </span>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-left">
+            Made with ❤️ by
+            <a href="https://github.com/gorupa" target="_blank" rel="noopener">gorupa</a>
+            &nbsp;·&nbsp;
+            <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MIT License</a>
+            &nbsp;·&nbsp;
+            No ads · No tracking · No server uploads
+        </div>
+        <div class="footer-right">
+            <span class="footer-badge">
+                <span class="material-icons-round">bolt</span>
+                Cloudflare Pages
+            </span>
+            <span class="footer-badge">
+                <span class="material-icons-round">favorite</span>
+                Open Source
+            </span>
+        </div>
+    </footer>
+
+</div>
+
+</body>
+</html>
