@@ -188,10 +188,10 @@
 
         .hero h1 {
             font-family: 'Syne', sans-serif;
-            font-size: clamp(2.4rem, 6vw, 4rem);
+            font-size: clamp(1.8rem, 5vw, 4rem);
             font-weight: 800;
-            line-height: 1.1;
-            letter-spacing: -1.5px;
+            line-height: 1.15;
+            letter-spacing: -1px;
             margin-bottom: 22px;
         }
         .hero h1 .line-2 {
@@ -201,6 +201,8 @@
             background-clip: text;
             background-size: 200% auto;
             animation: shimmer 4s linear infinite;
+            display: inline;
+            word-break: keep-all;
         }
 
         .hero-desc {
@@ -214,9 +216,12 @@
         /* ── Stats row ── */
         .stats-row {
             display: flex;
-            gap: 28px;
-            flex-wrap: wrap;
+            gap: 20px;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            padding-bottom: 4px;
         }
+        .stats-row::-webkit-scrollbar { display: none; }
         .stat {
             display: flex;
             flex-direction: column;
@@ -526,8 +531,11 @@
             .page { padding: 48px 18px 72px; }
             nav { margin-bottom: 64px; }
             .hero { margin-bottom: 56px; }
+            .hero h1 { font-size: clamp(1.75rem, 8vw, 2.4rem); letter-spacing: -0.5px; }
+            .hero-desc { font-size: 0.95rem; }
             .tools-grid { grid-template-columns: 1fr; }
-            .stats-row { gap: 18px; }
+            .stat-num { font-size: 1.1rem; }
+            .stat-lbl { font-size: 0.65rem; }
             footer { flex-direction: column; align-items: flex-start; }
         }
 
