@@ -1,44 +1,51 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>gorupa — Open Source Projects</title>
     <meta name="description" content="Free, open source projects by gorupa — privacy-first browser tools and student resources.">
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <style>
-
+        /* Material Design Light Theme Palette */
         :root {
-            --bg:         #0c0e10;
-            --surface:    #13161a;
-            --surface-2:  #1c2128;
-            --border:     rgba(255,255,255,0.08);
-            --border-h:   rgba(255,255,255,0.16);
-            --text:       #eef0f3;
-            --muted:      #7a8491;
-            --dim:        #3d4450;
-            --blue:       #4d9bf5;
-            --blue-bg:    rgba(77,155,245,0.1);
-            --blue-bd:    rgba(77,155,245,0.2);
-            --orange:     #ff6b35;
-            --orange-bg:  rgba(255,107,53,0.1);
-            --orange-bd:  rgba(255,107,53,0.2);
-            --green:      #3dba6f;
-            --green-bg:   rgba(61,186,111,0.1);
-            --green-bd:   rgba(61,186,111,0.2);
+            --bg:         #f8f9fa;
+            --surface:    #ffffff;
+            --surface-2:  #f1f3f4;
+            --border:     #e0e0e0;
+            --border-h:   #bdbdbd;
+            --text:       #202124;
+            --muted:      #5f6368;
+            --dim:        #80868b;
+            
+            /* Material Standard Colors */
+            --blue:       #1a73e8;
+            --blue-bg:    rgba(26, 115, 232, 0.1);
+            --blue-bd:    rgba(26, 115, 232, 0.2);
+            --orange:     #e65100;
+            --orange-bg:  rgba(230, 81, 0, 0.1);
+            --orange-bd:  rgba(230, 81, 0, 0.2);
+            --green:      #1e8e3e;
+            --green-bg:   rgba(30, 142, 62, 0.1);
+            --green-bd:   rgba(30, 142, 62, 0.2);
+            
+            /* Material Elevations */
+            --shadow-1:   0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+            --shadow-2:   0 1px 3px 0 rgba(60,64,67,0.3), 0 4px 8px 3px rgba(60,64,67,0.15);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: 'DM Sans', sans-serif;
+            font-family: 'Roboto', sans-serif;
             background: var(--bg);
             color: var(--text);
             min-height: 100vh;
             padding: 0 20px;
         }
 
+        /* Light background blobs for texture */
         .blob {
             position: fixed;
             border-radius: 50%;
@@ -46,9 +53,9 @@
             z-index: 0;
             filter: blur(80px);
         }
-        .blob-blue   { width: 500px; height: 500px; background: rgba(77,155,245,0.08);  top: -100px; left: -100px; }
-        .blob-orange { width: 400px; height: 400px; background: rgba(255,107,53,0.07);  bottom: -80px; right: -80px; }
-        .blob-green  { width: 350px; height: 350px; background: rgba(61,186,111,0.06);  top: 50%; left: 60%; }
+        .blob-blue   { width: 500px; height: 500px; background: rgba(26,115,232,0.08);  top: -100px; left: -100px; }
+        .blob-orange { width: 400px; height: 400px; background: rgba(230,81,0,0.05);  bottom: -80px; right: -80px; }
+        .blob-green  { width: 350px; height: 350px; background: rgba(30,142,62,0.05);  top: 50%; left: 60%; }
 
         .page {
             position: relative;
@@ -67,8 +74,8 @@
             animation: fadeUp 0.5s ease both;
         }
         .logo {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 900;
             font-size: 1.15rem;
             color: var(--text);
             text-decoration: none;
@@ -81,8 +88,8 @@
             display: inline-flex;
             align-items: center;
             gap: 7px;
-            font-size: 0.82rem;
-            font-weight: 600;
+            font-size: 0.85rem;
+            font-weight: 500;
             color: var(--muted);
             text-decoration: none;
             padding: 8px 16px;
@@ -91,7 +98,7 @@
             background: var(--surface);
             transition: all 0.2s;
         }
-        .nav-gh:hover { color: var(--text); border-color: var(--border-h); }
+        .nav-gh:hover { color: var(--text); border-color: var(--border-h); background: var(--surface-2); }
         .nav-gh svg { width: 15px; height: 15px; fill: currentColor; flex-shrink: 0; }
 
         /* hero */
@@ -103,37 +110,35 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             font-weight: 700;
-            letter-spacing: 1.8px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
             color: var(--blue);
             background: var(--blue-bg);
-            border: 1px solid var(--blue-bd);
-            padding: 5px 14px;
+            padding: 6px 14px;
             border-radius: 100px;
             margin-bottom: 24px;
         }
-        .hero-eyebrow .material-icons-round { font-size: 13px; }
+        .hero-eyebrow .material-icons-round { font-size: 14px; }
         .hero h1 {
-            font-family: 'Syne', sans-serif;
-            font-weight: 800;
-            font-size: clamp(1.9rem, 5.5vw, 3.2rem);
-            line-height: 1.15;
-            letter-spacing: -0.8px;
+            font-weight: 900;
+            font-size: clamp(2rem, 5.5vw, 3.2rem);
+            line-height: 1.2;
+            letter-spacing: -0.5px;
             margin-bottom: 16px;
         }
         .hero h1 em {
             font-style: normal;
-            background: linear-gradient(100deg, var(--blue) 0%, #90c2ff 60%, var(--orange) 100%);
+            background: linear-gradient(100deg, var(--blue) 0%, #d81b60 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         .hero p {
-            font-size: 1rem;
+            font-size: 1.05rem;
             color: var(--muted);
-            line-height: 1.7;
+            line-height: 1.6;
             max-width: 500px;
         }
 
@@ -142,40 +147,42 @@
             display: flex;
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 16px;
+            border-radius: 12px;
             overflow: hidden;
             margin-bottom: 48px;
+            box-shadow: var(--shadow-1);
             animation: fadeUp 0.5s ease 0.13s both;
         }
         .stat {
             flex: 1;
-            padding: 18px 20px;
+            padding: 20px;
             text-align: center;
             border-right: 1px solid var(--border);
         }
         .stat:last-child { border-right: none; }
         .stat-num {
             display: block;
-            font-family: 'DM Mono', monospace;
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 500;
             font-size: 1.4rem;
             color: var(--text);
-            margin-bottom: 3px;
+            margin-bottom: 4px;
         }
         .stat-lbl {
-            font-size: 0.62rem;
+            font-size: 0.7rem;
             font-weight: 700;
             letter-spacing: 0.8px;
             text-transform: uppercase;
-            color: var(--dim);
+            color: var(--muted);
         }
 
         /* section label */
         .label {
-            font-size: 0.68rem;
+            font-size: 0.75rem;
             font-weight: 700;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            color: var(--dim);
+            color: var(--muted);
             margin-bottom: 16px;
             display: flex;
             align-items: center;
@@ -184,47 +191,45 @@
         }
         .label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-        /* cards */
+        /* cards container */
         .projects {
             display: flex;
             flex-direction: column;
-            gap: 14px;
-            margin-bottom: 56px;
+            gap: 16px;
+            margin-bottom: 40px;
             animation: fadeUp 0.5s ease 0.2s both;
         }
 
-        /* THE KEY FIX: entire card is an <a> tag */
+        /* FIX: project-card is now a <div> instead of an <a>. 
+           Nested links (<a> inside <a>) break HTML and cause buttons to fail.
+        */
         .project-card {
             display: block;
-            text-decoration: none;
-            color: inherit;
             background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 22px;
-            transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+            border-radius: 12px;
+            padding: 24px;
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            overflow: hidden;
-            cursor: pointer;
+            box-shadow: var(--shadow-1);
+            border: 1px solid transparent; /* Keeps sizing consistent */
         }
         .project-card:hover {
-            border-color: var(--border-h);
-            transform: translateY(-3px);
-            box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-2);
         }
+        
+        /* Top color bar */
         .project-card::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0;
-            height: 2px;
-            opacity: 0;
-            transition: opacity 0.2s;
-            border-radius: 18px 18px 0 0;
+            height: 4px;
+            border-radius: 12px 12px 0 0;
+            opacity: 0.8;
         }
-        .project-card:hover::before { opacity: 1; }
-        .project-card.blue::before   { background: linear-gradient(90deg, var(--blue), transparent); }
-        .project-card.orange::before { background: linear-gradient(90deg, var(--orange), transparent); }
-        .project-card.green::before  { background: linear-gradient(90deg, var(--green), transparent); }
+        .project-card.blue::before   { background: var(--blue); }
+        .project-card.orange::before { background: var(--orange); }
+        .project-card.green::before  { background: var(--green); }
 
         .card-row {
             display: flex;
@@ -232,92 +237,86 @@
             align-items: flex-start;
         }
         .card-icon {
-            width: 46px; height: 46px;
-            border-radius: 12px;
+            width: 48px; height: 48px;
+            border-radius: 50%; /* Material style circular icons */
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
         }
-        .card-icon .material-icons-round { font-size: 22px; }
+        .card-icon .material-icons-round { font-size: 24px; }
         .blue   .card-icon { background: var(--blue-bg);   color: var(--blue);   }
         .orange .card-icon { background: var(--orange-bg); color: var(--orange); }
         .green  .card-icon { background: var(--green-bg);  color: var(--green);  }
 
         .card-body { flex: 1; min-width: 0; }
         .card-title {
-            font-family: 'Syne', sans-serif;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 700;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
             color: var(--text);
         }
         .card-desc {
-            font-size: 0.865rem;
+            font-size: 0.95rem;
             color: var(--muted);
-            line-height: 1.6;
-            margin-bottom: 14px;
+            line-height: 1.5;
+            margin-bottom: 16px;
         }
+        
         .card-bottom {
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
         }
-        .card-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+        
+        /* Material Chips */
+        .card-tags { display: flex; gap: 8px; flex-wrap: wrap; }
         .tag {
-            font-size: 0.67rem;
-            font-weight: 600;
-            padding: 3px 9px;
-            border-radius: 100px;
-            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 16px;
+            font-family: 'Roboto', sans-serif;
             border: 1px solid transparent;
         }
-        .blue   .tag-a { background: var(--blue-bg);   color: var(--blue);   border-color: var(--blue-bd);   }
-        .orange .tag-a { background: var(--orange-bg); color: var(--orange); border-color: var(--orange-bd); }
-        .green  .tag-a { background: var(--green-bg);  color: var(--green);  border-color: var(--green-bd);  }
-        .tag-n { background: rgba(255,255,255,0.04); color: var(--muted); border-color: var(--border); }
+        .blue   .tag-a { background: var(--blue-bg);   color: var(--blue);   }
+        .orange .tag-a { background: var(--orange-bg); color: var(--orange); }
+        .green  .tag-a { background: var(--green-bg);  color: var(--green);  }
+        .tag-n { background: var(--surface-2); color: var(--muted); border: 1px solid var(--border); }
 
-        /* These buttons stop card click so they open independently */
+        /* Buttons */
         .card-btns {
             display: flex;
-            gap: 7px;
+            gap: 8px;
             flex-shrink: 0;
         }
         .cbtn {
             display: inline-flex;
             align-items: center;
-            gap: 4px;
-            font-size: 0.76rem;
-            font-weight: 600;
+            gap: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
             text-decoration: none;
-            padding: 6px 12px;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            color: var(--muted);
+            padding: 8px 16px;
+            border-radius: 20px; /* Material rounded buttons */
+            color: var(--text);
             background: var(--surface-2);
-            transition: all 0.15s;
-            position: relative;
-            z-index: 2;
+            transition: background 0.2s;
             cursor: pointer;
         }
-        .cbtn .material-icons-round { font-size: 13px; }
-        .cbtn svg { width: 12px; height: 12px; fill: currentColor; flex-shrink: 0; }
-        .cbtn:hover { border-color: var(--border-h); color: var(--text); }
-        .blue   .cbtn.live { background: var(--blue-bg);   border-color: var(--blue-bd);   color: var(--blue);   }
-        .orange .cbtn.live { background: var(--orange-bg); border-color: var(--orange-bd); color: var(--orange); }
-        .green  .cbtn.live { background: var(--green-bg);  border-color: var(--green-bd);  color: var(--green);  }
-        .cbtn.live:hover { filter: brightness(1.25); }
-
-        .card-arrow {
-            color: var(--dim);
-            font-size: 18px;
-            flex-shrink: 0;
-            transition: all 0.2s;
-            margin-top: 2px;
-        }
-        .project-card:hover .card-arrow { color: var(--muted); transform: translate(3px, -3px); }
+        .cbtn .material-icons-round { font-size: 16px; }
+        .cbtn svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
+        .cbtn:hover { background: var(--border); }
+        
+        .blue   .cbtn.live { background: var(--blue-bg);   color: var(--blue);   }
+        .orange .cbtn.live { background: var(--orange-bg); color: var(--orange); }
+        .green  .cbtn.live { background: var(--green-bg);  color: var(--green);  }
+        
+        .blue   .cbtn.live:hover { background: rgba(26, 115, 232, 0.15); }
+        .orange .cbtn.live:hover { background: rgba(230, 81, 0, 0.15); }
+        .green  .cbtn.live:hover { background: rgba(30, 142, 62, 0.15); }
 
         /* footer */
         footer {
@@ -328,12 +327,12 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 10px;
-            font-size: 0.8rem;
-            color: var(--dim);
+            font-size: 0.85rem;
+            color: var(--muted);
             animation: fadeUp 0.5s ease 0.25s both;
         }
-        footer a { color: var(--muted); text-decoration: none; font-weight: 600; transition: color 0.15s; }
-        footer a:hover { color: var(--text); }
+        footer a { color: var(--text); text-decoration: none; font-weight: 500; transition: color 0.15s; }
+        footer a:hover { color: var(--blue); }
 
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(18px); }
@@ -343,11 +342,11 @@
         @media (max-width: 540px) {
             .page { padding: 36px 0 60px; }
             nav { margin-bottom: 48px; }
-            .card-row { gap: 12px; }
-            .card-arrow { display: none; }
+            .card-row { gap: 12px; flex-direction: column; }
             .card-bottom { flex-direction: column; align-items: flex-start; }
             .stats .stat-num { font-size: 1.15rem; }
-            footer { flex-direction: column; }
+            footer { flex-direction: column; align-items: flex-start; }
+            .card-btns { width: 100%; justify-content: flex-start; }
         }
 
     </style>
@@ -399,16 +398,15 @@
         </div>
     </div>
 
-    <div class="label">Projects</div>
-
+    <div class="label">Browser Tools</div>
     <div class="projects">
 
-        <a class="project-card blue" href="https://local-image-compressor.pages.dev/" target="_blank" rel="noopener">
+        <div class="project-card blue">
             <div class="card-row">
                 <div class="card-icon"><span class="material-icons-round">compress</span></div>
                 <div class="card-body">
                     <div class="card-title">Local Image Compressor</div>
-                    <p class="card-desc">Compress JPG &amp; PNG images instantly in your browser. Live size preview as you drag the quality slider — no uploads, ever.</p>
+                    <p class="card-desc">Compress JPG & PNG images instantly in your browser. Live size preview as you drag the quality slider — no uploads, ever.</p>
                     <div class="card-bottom">
                         <div class="card-tags">
                             <span class="tag tag-a">JPG</span>
@@ -417,25 +415,24 @@
                             <span class="tag tag-n">100% Local</span>
                         </div>
                         <div class="card-btns">
-                            <a class="cbtn live" href="https://local-image-compressor.pages.dev/" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                            <a class="cbtn live" href="https://local-image-compressor.pages.dev/" target="_blank" rel="noopener">
                                 <span class="material-icons-round">open_in_new</span>Live
                             </a>
-                            <a class="cbtn" href="https://github.com/gorupa/local-image-compressor" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                            <a class="cbtn" href="https://github.com/gorupa/local-image-compressor" target="_blank" rel="noopener">
                                 <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>Code
                             </a>
                         </div>
                     </div>
                 </div>
-                <span class="material-icons-round card-arrow">arrow_outward</span>
             </div>
-        </a>
+        </div>
 
-        <a class="project-card orange" href="https://image-to-pdf-afb.pages.dev/" target="_blank" rel="noopener">
+        <div class="project-card orange">
             <div class="card-row">
                 <div class="card-icon"><span class="material-icons-round">picture_as_pdf</span></div>
                 <div class="card-body">
                     <div class="card-title">Image to PDF</div>
-                    <p class="card-desc">Convert JPG, PNG &amp; WebP images into a PDF in seconds. Drag to reorder pages, pick page size and margins — all local.</p>
+                    <p class="card-desc">Convert JPG, PNG & WebP images into a PDF in seconds. Drag to reorder pages, pick page size and margins — all local.</p>
                     <div class="card-bottom">
                         <div class="card-tags">
                             <span class="tag tag-a">JPG</span>
@@ -445,25 +442,29 @@
                             <span class="tag tag-n">100% Local</span>
                         </div>
                         <div class="card-btns">
-                            <a class="cbtn live" href="https://image-to-pdf-afb.pages.dev/" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                            <a class="cbtn live" href="https://image-to-pdf-afb.pages.dev/" target="_blank" rel="noopener">
                                 <span class="material-icons-round">open_in_new</span>Live
                             </a>
-                            <a class="cbtn" href="https://github.com/gorupa/image-to-pdf" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                            <a class="cbtn" href="https://github.com/gorupa/image-to-pdf" target="_blank" rel="noopener">
                                 <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>Code
                             </a>
                         </div>
                     </div>
                 </div>
-                <span class="material-icons-round card-arrow">arrow_outward</span>
             </div>
-        </a>
+        </div>
 
-        <a class="project-card green" href="https://mlsu-dhj.pages.dev/" target="_blank" rel="noopener">
+    </div>
+
+    <div class="label">Student Projects</div>
+    <div class="projects">
+
+        <div class="project-card green">
             <div class="card-row">
                 <div class="card-icon"><span class="material-icons-round">menu_book</span></div>
                 <div class="card-body">
                     <div class="card-title">MLSU Law Resources</div>
-                    <p class="card-desc">Free notes, syllabus &amp; past papers for Mohan Lal Sukhadia University LLB &amp; BA.LLB students. Filter by course, year and subject.</p>
+                    <p class="card-desc">Free notes, syllabus & past papers for Mohan Lal Sukhadia University LLB & BA.LLB students. Filter by course, year and subject.</p>
                     <div class="card-bottom">
                         <div class="card-tags">
                             <span class="tag tag-a">LLB</span>
@@ -472,18 +473,17 @@
                             <span class="tag tag-n">Past Papers</span>
                         </div>
                         <div class="card-btns">
-                            <a class="cbtn live" href="https://mlsu-dhj.pages.dev/" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                            <a class="cbtn live" href="https://mlsu-dhj.pages.dev/" target="_blank" rel="noopener">
                                 <span class="material-icons-round">open_in_new</span>Live
                             </a>
-                            <a class="cbtn" href="https://github.com/Gorupa/mlsu-" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                            <a class="cbtn" href="https://github.com/Gorupa/mlsu-" target="_blank" rel="noopener">
                                 <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>Code
                             </a>
                         </div>
                     </div>
                 </div>
-                <span class="material-icons-round card-arrow">arrow_outward</span>
             </div>
-        </a>
+        </div>
 
     </div>
 
@@ -495,3 +495,4 @@
 </div>
 </body>
 </html>
+
