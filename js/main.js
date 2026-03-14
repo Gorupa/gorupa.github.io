@@ -49,13 +49,11 @@ const myProjects = [
         category: "browser",
         theme: "blue",
         icon: "account_balance_wallet",
-        title: "Cashroute",
-        desc: "A clean, fast redirection interface for transferring money from digital wallets to your bank account. CashRoute does not process payments — it simply connects you to the right gateway.
-
-.",
+        title: "CashRoute",
+        desc: "A clean, fast redirection interface for transferring money from digital wallets to your bank account. CashRoute does not process payments — it simply connects you to the right gateway.",
         tags: [
-            { class: "tag-a", text: "Finance" },
-            { class: "tag-n", text: "Wallet Transfer" },
+            { class: "tag-a", text: "Payment Utility" },
+            { class: "tag-n", text: "Redirect Gateway" },
             { class: "tag-n", text: "100% Local" }
         ],
         liveLink: "https://cashroute-deh.pages.dev/",
