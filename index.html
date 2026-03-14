@@ -1,147 +1,124 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>gorupa — Open Source Projects</title>
-    <meta name="description" content="Building privacy-first consumer tools and pioneering developer libraries. Open source, always.">
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <meta name="description" content="Taking open source to the next level. Building privacy-first consumer tools and pioneering developer libraries.">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <!-- Grain overlay -->
-    <div class="grain"></div>
-
-    <!-- Nav -->
+<div class="page">
     <nav class="nav">
         <a class="nav-logo" href="#">
             <span class="nav-logo-dot"></span>
             gorupa
         </a>
-        <a class="nav-gh" href="https://github.com/gorupa" target="_blank" rel="noopener">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-            github.com/gorupa
-        </a>
+        <div class="nav-actions">
+            <button id="theme-toggle" class="icon-btn" aria-label="Toggle Theme">
+                <span class="material-icons-round" id="theme-icon">light_mode</span>
+            </button>
+            <a class="nav-gh" href="https://github.com/gorupa" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" width="16" height="16"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                <span>github.com/gorupa</span>
+            </a>
+        </div>
     </nav>
 
-    <!-- Hero -->
     <section class="hero">
-        <div class="hero-tag">Open Source · Privacy First · Built in India</div>
-        <h1 class="hero-title">
-            Building tools<br>
-            <span class="hero-accent">people actually use.</span>
-        </h1>
-        <p class="hero-sub">From privacy-first browser utilities to pioneering JS libraries — everything is open source, ad-free and runs locally.</p>
-
-        <!-- Stats -->
+        <div class="hero-tag">
+            <span class="material-icons-round" style="font-size: 14px;">bolt</span>
+            The Next Level of Open Source
+        </div>
+        <h1 class="hero-title">Building open source for<br><span class="hero-accent">real impact.</span></h1>
+        <p class="hero-sub">We are expanding the boundaries of open source. From privacy-first utilities for everyday consumers to pioneering libraries for developers, we build solutions to solve real-world problems.</p>
+        
         <div class="stats">
             <div class="stat">
-                <div class="stat-num" id="project-count">0</div>
-                <div class="stat-lbl">Projects</div>
+                <span class="stat-num" id="project-count">0</span>
+                <span class="stat-lbl">Projects</span>
             </div>
             <div class="stat-div"></div>
             <div class="stat">
-                <div class="stat-num">0</div>
-                <div class="stat-lbl">Ads Ever</div>
+                <span class="stat-num">0</span>
+                <span class="stat-lbl">Ads Ever</span>
             </div>
             <div class="stat-div"></div>
             <div class="stat">
-                <div class="stat-num">0</div>
-                <div class="stat-lbl">Uploads</div>
-            </div>
-            <div class="stat-div"></div>
-            <div class="stat">
-                <div class="stat-num">MIT</div>
-                <div class="stat-lbl">License</div>
+                <span class="stat-num">0</span>
+                <span class="stat-lbl">Tracking</span>
             </div>
         </div>
     </section>
 
     <main class="main">
-
-        <!-- What we build -->
         <div class="wwd-grid">
             <div class="wwd-card wwd-blue">
-                <div class="wwd-icon">⚡</div>
+                <div class="wwd-icon"><span class="material-icons-round">group</span></div>
                 <h3>For Consumers</h3>
-                <p>Fast, privacy-first browser utilities. Your data never leaves your device.</p>
+                <p>Fast, privacy-first browser utilities that run 100% locally. Your data never leaves your device.</p>
             </div>
             <div class="wwd-card wwd-amber">
-                <div class="wwd-icon">📦</div>
+                <div class="wwd-icon"><span class="material-icons-round">integration_instructions</span></div>
                 <h3>For Developers</h3>
-                <p>JS libraries that simplify complex data integration for modern apps.</p>
+                <p>Pioneering JavaScript libraries and tools that simplify complex data integration for modern apps.</p>
             </div>
             <div class="wwd-card wwd-green">
-                <div class="wwd-icon">🎓</div>
+                <div class="wwd-icon"><span class="material-icons-round">school</span></div>
                 <h3>For Students</h3>
-                <p>Free academic resources, syllabus guides and past papers for everyone.</p>
+                <p>Free, accessible academic resources, syllabus guides, and past papers to democratize education.</p>
             </div>
         </div>
 
-        <!-- Bio -->
-        <div class="section-label">The Developer</div>
+        <div class="section-label">Meet the Developer</div>
         <div class="bio-card">
-            <div class="bio-avatar">GK</div>
+            <div class="bio-avatar">G</div>
             <div class="bio-body">
                 <div class="bio-name">Gaurav Kalal <span class="bio-handle">@gorupa</span></div>
-                <p class="bio-desc">Law student bridging law and technology. Interested in India's digital infrastructure and data trends — building open-source, privacy-first utilities and developer libraries that solve real problems.</p>
-                <div class="bio-chips">
-                    <span class="bio-chip">MLSU Law</span>
-                    <span class="bio-chip">LLB + Tech</span>
-                    <span class="bio-chip">Rajasthan, India</span>
-                </div>
+                <div class="bio-desc">I'm a law student bridging the gap between law and technology. With a strong interest in India's digital infrastructure and data trends, I build open-source, privacy-first utilities and pioneering developer libraries that solve real problems.</div>
             </div>
         </div>
 
-        <!-- Tech Stack -->
-        <div class="section-label">Tech Stack</div>
+        <div class="section-label">Core Tech Stack</div>
         <div class="tech-row">
-            <span class="tech-chip">Vanilla JS</span>
-            <span class="tech-chip">HTML5 & CSS3</span>
-            <span class="tech-chip">Canvas API</span>
-            <span class="tech-chip">pdf-lib</span>
-            <span class="tech-chip">jsPDF</span>
-            <span class="tech-chip">REST APIs</span>
-            <span class="tech-chip">Node.js</span>
-            <span class="tech-chip">Tailwind</span>
+            <div class="tech-chip">Vanilla JavaScript</div>
+            <div class="tech-chip">HTML5 & CSS3</div>
+            <div class="tech-chip">Canvas API</div>
+            <div class="tech-chip">pdf-lib & jsPDF</div>
+            <div class="tech-chip">NPM Packages</div>
+            <div class="tech-chip">REST APIs</div>
         </div>
 
-        <!-- Browser Tools -->
         <div class="section-label">Browser Tools</div>
         <div class="project-grid" id="browser-tools"></div>
 
-        <!-- Libraries -->
         <div class="section-label">JavaScript Libraries</div>
         <div class="project-grid" id="libraries"></div>
 
-        <!-- Student Projects -->
         <div class="section-label">Student Projects</div>
         <div class="project-grid" id="student-projects"></div>
-
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="footer-left">
-            <span class="footer-logo">
-                <span class="nav-logo-dot"></span>
-                gorupa
-            </span>
+            <div class="footer-logo">
+                <span class="nav-logo-dot"></span> gorupa
+            </div>
             <span class="footer-copy">© 2026 Gaurav Kalal</span>
         </div>
         <div class="footer-right">
-            <a href="https://github.com/gorupa" target="_blank" rel="noopener">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-                gorupa
-            </a>
+            <span>No ads</span>
             <span class="footer-sep">·</span>
-            <a href="https://gorupa.github.io" target="_blank" rel="noopener">gorupa.github.io</a>
+            <span>No tracking</span>
             <span class="footer-sep">·</span>
-            <span>No ads · No tracking</span>
+            <span>Privacy first</span>
         </div>
     </footer>
+</div>
 
-    <script src="js/main.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
