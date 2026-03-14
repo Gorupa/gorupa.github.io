@@ -60,6 +60,21 @@ const myProjects = [
         codeLink: "https://github.com/Gorupa/cashroute"
     },
     {
+        category: "library",
+        theme: "orange",
+        icon: "insights",
+        title: "PulseKit",
+        desc: "A pioneering JavaScript library for interacting with PhonePe Pulse data. The first open-source tool of its kind to simplify accessing and visualizing India's digital payment and transaction trends directly in your apps.",
+        tags: [
+            { class: "tag-a", text: "JavaScript" },
+            { class: "tag-a", text: "PhonePe Pulse" },
+            { class: "tag-n", text: "Data API" },
+            { class: "tag-n", text: "NPM" }
+        ],
+        liveLink: "https://gorupa.github.io/pulsekit/demo/",
+        codeLink: "https://github.com/Gorupa/pulsekit"
+    },
+    {
         category: "student",
         theme: "green",
         icon: "menu_book",
@@ -79,6 +94,7 @@ const myProjects = [
 // 2. Generate the exact same HTML structure automatically
 function renderProjects() {
     const browserContainer = document.getElementById('browser-tools');
+    const libraryContainer = document.getElementById('libraries');
     const studentContainer = document.getElementById('student-projects');
     
     // Update the project counter automatically
@@ -117,6 +133,8 @@ function renderProjects() {
         // Inject into the correct category container
         if (proj.category === 'student') {
             studentContainer.innerHTML += cardHtml;
+        } else if (proj.category === 'library') {
+            libraryContainer.innerHTML += cardHtml;
         } else {
             browserContainer.innerHTML += cardHtml;
         }
