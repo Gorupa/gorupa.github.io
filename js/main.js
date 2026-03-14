@@ -46,7 +46,7 @@ const myProjects = [
         codeLink: "https://github.com/Gorupa/pdf-tools"
     },
     {
-        category: "Finance",
+        category: "browser",
         theme: "blue",
         icon: "account_balance_wallet",
         title: "Cashroute",
