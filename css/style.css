@@ -1,337 +1,71 @@
-/* Material Design Light Theme Palette */
-:root {
-    --bg:         #f8f9fa;
-    --surface:    #ffffff;
-    --surface-2:  #f1f3f4;
-    --border:     #e0e0e0;
-    --border-h:   #bdbdbd;
-    --text:       #202124;
-    --muted:      #5f6368;
-    --dim:        #80868b;
-    
-    /* Material Standard Colors */
-    --blue:       #1a73e8;
-    --blue-bg:    rgba(26, 115, 232, 0.1);
-    --blue-bd:    rgba(26, 115, 232, 0.2);
-    --orange:     #e65100;
-    --orange-bg:  rgba(230, 81, 0, 0.1);
-    --orange-bd:  rgba(230, 81, 0, 0.2);
-    --green:      #1e8e3e;
-    --green-bg:   rgba(30, 142, 62, 0.1);
-    --green-bd:   rgba(30, 142, 62, 0.2);
-    
-    /* Material Elevations */
-    --shadow-1:   0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
-    --shadow-2:   0 1px 3px 0 rgba(60,64,67,0.3), 0 4px 8px 3px rgba(60,64,67,0.15);
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-    font-family: 'Roboto', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    padding: 0 20px;
-}
-
-/* Light background blobs for texture */
-.blob {
-    position: fixed;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-    filter: blur(80px);
-}
-.blob-blue   { width: 500px; height: 500px; background: rgba(26,115,232,0.08);  top: -100px; left: -100px; }
-.blob-orange { width: 400px; height: 400px; background: rgba(230,81,0,0.05);  bottom: -80px; right: -80px; }
-.blob-green  { width: 350px; height: 350px; background: rgba(30,142,62,0.05);  top: 50%; left: 60%; }
-
-.page {
-    position: relative;
-    z-index: 1;
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 56px 0 80px;
-}
-
-/* nav */
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 72px;
-    animation: fadeUp 0.5s ease both;
-}
-.logo {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 900;
-    font-size: 1.15rem;
-    color: var(--text);
-    text-decoration: none;
+/* --- Bio Card --- */
+.bio-card {
     display: flex;
     align-items: center;
-    gap: 8px;
-}
-.logo-dot { width: 8px; height: 8px; background: var(--blue); border-radius: 50%; }
-.nav-gh {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--muted);
-    text-decoration: none;
-    padding: 8px 16px;
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    background: var(--surface);
-    transition: all 0.2s;
-}
-.nav-gh:hover { color: var(--text); border-color: var(--border-h); background: var(--surface-2); }
-.nav-gh svg { width: 15px; height: 15px; fill: currentColor; flex-shrink: 0; }
-
-/* hero */
-.hero {
-    margin-bottom: 40px;
-    animation: fadeUp 0.5s ease 0.08s both;
-}
-.hero-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--blue);
-    background: var(--blue-bg);
-    padding: 6px 14px;
-    border-radius: 100px;
-    margin-bottom: 24px;
-}
-.hero-eyebrow .material-icons-round { font-size: 14px; }
-.hero h1 {
-    font-weight: 900;
-    font-size: clamp(2rem, 5.5vw, 3.2rem);
-    line-height: 1.2;
-    letter-spacing: -0.5px;
-    margin-bottom: 16px;
-}
-.hero h1 em {
-    font-style: normal;
-    background: linear-gradient(100deg, var(--blue) 0%, #d81b60 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-.hero p {
-    font-size: 1.05rem;
-    color: var(--muted);
-    line-height: 1.6;
-    max-width: 500px;
-}
-
-/* stats */
-.stats {
-    display: flex;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-    margin-bottom: 48px;
-    box-shadow: var(--shadow-1);
-    animation: fadeUp 0.5s ease 0.13s both;
-}
-.stat {
-    flex: 1;
-    padding: 20px;
-    text-align: center;
-    border-right: 1px solid var(--border);
-}
-.stat:last-child { border-right: none; }
-.stat-num {
-    display: block;
-    font-family: 'Roboto Mono', monospace;
-    font-weight: 500;
-    font-size: 1.4rem;
-    color: var(--text);
-    margin-bottom: 4px;
-}
-.stat-lbl {
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    color: var(--muted);
-}
-
-/* section label */
-.label {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    animation: fadeUp 0.5s ease 0.16s both;
-}
-.label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-
-/* cards container */
-.projects {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-bottom: 40px;
-    animation: fadeUp 0.5s ease 0.2s both;
-}
-
-.project-card {
-    display: block;
-    background: var(--surface);
+    gap: 20px;
+    background: linear-gradient(135deg, var(--blue-bg), var(--surface));
+    border: 1px solid var(--blue-bd);
     border-radius: 12px;
     padding: 24px;
-    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
+    margin-bottom: 40px;
     box-shadow: var(--shadow-1);
-    border: 1px solid transparent; 
+    animation: fadeUp 0.5s ease 0.18s both;
 }
-.project-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-2);
-}
-
-/* Top color bar */
-.project-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 4px;
-    border-radius: 12px 12px 0 0;
-    opacity: 0.8;
-}
-.project-card.blue::before   { background: var(--blue); }
-.project-card.orange::before { background: var(--orange); }
-.project-card.green::before  { background: var(--green); }
-
-.card-row {
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-}
-.card-icon {
-    width: 48px; height: 48px;
+.bio-avatar {
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
+    background: var(--blue);
+    color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 900;
     flex-shrink: 0;
+    box-shadow: var(--shadow-1);
 }
-.card-icon .material-icons-round { font-size: 24px; }
-.blue   .card-icon { background: var(--blue-bg);   color: var(--blue);   }
-.orange .card-icon { background: var(--orange-bg); color: var(--orange); }
-.green  .card-icon { background: var(--green-bg);  color: var(--green);  }
-
-.card-body { flex: 1; min-width: 0; }
-.card-title {
-    font-size: 1.1rem;
+.bio-text h3 {
+    font-size: 1.2rem;
     font-weight: 700;
-    margin-bottom: 6px;
     color: var(--text);
+    margin-bottom: 6px;
 }
-.card-desc {
+.bio-text p {
     font-size: 0.95rem;
     color: var(--muted);
     line-height: 1.5;
-    margin-bottom: 16px;
 }
 
-.card-bottom {
+/* --- Tech Stack --- */
+.tech-stack {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
     flex-wrap: wrap;
     gap: 12px;
+    margin-bottom: 56px;
+    animation: fadeUp 0.5s ease 0.2s both;
 }
-
-/* Material Chips */
-.card-tags { display: flex; gap: 8px; flex-wrap: wrap; }
-.tag {
-    font-size: 0.75rem;
-    font-weight: 500;
-    padding: 4px 10px;
-    border-radius: 16px;
-    font-family: 'Roboto', sans-serif;
-    border: 1px solid transparent;
-}
-.blue   .tag-a { background: var(--blue-bg);   color: var(--blue);   }
-.orange .tag-a { background: var(--orange-bg); color: var(--orange); }
-.green  .tag-a { background: var(--green-bg);  color: var(--green);  }
-.tag-n { background: var(--surface-2); color: var(--muted); border: 1px solid var(--border); }
-
-/* Buttons */
-.card-btns {
-    display: flex;
-    gap: 8px;
-    flex-shrink: 0;
-}
-.cbtn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+.tech-chip {
+    font-family: 'Roboto Mono', monospace;
     font-size: 0.85rem;
     font-weight: 500;
-    text-decoration: none;
-    padding: 8px 16px;
-    border-radius: 20px;
     color: var(--text);
-    background: var(--surface-2);
-    transition: background 0.2s;
-    cursor: pointer;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 8px;
+    box-shadow: var(--shadow-1);
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s;
+    cursor: default;
 }
-.cbtn .material-icons-round { font-size: 16px; }
-.cbtn svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
-.cbtn:hover { background: var(--border); }
-
-.blue   .cbtn.live { background: var(--blue-bg);   color: var(--blue);   }
-.orange .cbtn.live { background: var(--orange-bg); color: var(--orange); }
-.green  .cbtn.live { background: var(--green-bg);  color: var(--green);  }
-
-.blue   .cbtn.live:hover { background: rgba(26, 115, 232, 0.15); }
-.orange .cbtn.live:hover { background: rgba(230, 81, 0, 0.15); }
-.green  .cbtn.live:hover { background: rgba(30, 142, 62, 0.15); }
-
-/* footer */
-footer {
-    border-top: 1px solid var(--border);
-    padding-top: 28px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    font-size: 0.85rem;
-    color: var(--muted);
-    animation: fadeUp 0.5s ease 0.25s both;
-}
-footer a { color: var(--text); text-decoration: none; font-weight: 500; transition: color 0.15s; }
-footer a:hover { color: var(--blue); }
-
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: translateY(0); }
+.tech-chip:hover {
+    transform: translateY(-2px);
+    border-color: var(--blue);
 }
 
 @media (max-width: 540px) {
-    .page { padding: 36px 0 60px; }
-    nav { margin-bottom: 48px; }
-    .card-row { gap: 12px; flex-direction: column; }
-    .card-bottom { flex-direction: column; align-items: flex-start; }
-    .stats .stat-num { font-size: 1.15rem; }
-    footer { flex-direction: column; align-items: flex-start; }
-    .card-btns { width: 100%; justify-content: flex-start; }
+    .bio-card {
+        flex-direction: column;
+        text-align: center;
+    }
 }
