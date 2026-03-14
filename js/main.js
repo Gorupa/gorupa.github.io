@@ -50,9 +50,7 @@ const myProjects = [
         theme: "blue",
         icon: "account_balance_wallet",
         title: "Cashroute",
-        desc: "
-
-    A clean, fast redirection interface for transferring money from digital wallets to your bank account. CashRoute does not process payments — it simply connects you to the right gateway.
+        desc: "A clean, fast redirection interface for transferring money from digital wallets to your bank account. CashRoute does not process payments — it simply connects you to the right gateway.
 
 .",
         tags: [
