@@ -190,9 +190,6 @@ nav {
     animation: fadeUp 0.5s ease 0.2s both;
 }
 
-/* FIX: project-card is now a <div> instead of an <a>.
-   Nested links (<a> inside <a>) break HTML and cause buttons to fail.
-*/
 .project-card {
     display: block;
     background: var(--surface);
@@ -201,7 +198,7 @@ nav {
     transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     box-shadow: var(--shadow-1);
-    border: 1px solid transparent; /* Keeps sizing consistent */
+    border: 1px solid transparent; 
 }
 .project-card:hover {
     transform: translateY(-2px);
@@ -227,18 +224,17 @@ nav {
     align-items: flex-start;
 }
 .card-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%; /* Material style circular icons */
+    width: 48px; height: 48px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
 }
 .card-icon .material-icons-round { font-size: 24px; }
-.blue   .card-icon { background: var(--blue-bg);   color: var(--blue); }
+.blue   .card-icon { background: var(--blue-bg);   color: var(--blue);   }
 .orange .card-icon { background: var(--orange-bg); color: var(--orange); }
-.green  .card-icon { background: var(--green-bg);  color: var(--green); }
+.green  .card-icon { background: var(--green-bg);  color: var(--green);  }
 
 .card-body { flex: 1; min-width: 0; }
 .card-title {
@@ -272,9 +268,9 @@ nav {
     font-family: 'Roboto', sans-serif;
     border: 1px solid transparent;
 }
-.blue   .tag-a { background: var(--blue-bg);   color: var(--blue); }
+.blue   .tag-a { background: var(--blue-bg);   color: var(--blue);   }
 .orange .tag-a { background: var(--orange-bg); color: var(--orange); }
-.green  .tag-a { background: var(--green-bg);  color: var(--green); }
+.green  .tag-a { background: var(--green-bg);  color: var(--green);  }
 .tag-n { background: var(--surface-2); color: var(--muted); border: 1px solid var(--border); }
 
 /* Buttons */
@@ -292,7 +288,6 @@ nav {
     text-decoration: none;
     padding: 8px 16px;
     border-radius: 20px;
-    /* Material rounded buttons */
     color: var(--text);
     background: var(--surface-2);
     transition: background 0.2s;
@@ -302,9 +297,9 @@ nav {
 .cbtn svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
 .cbtn:hover { background: var(--border); }
 
-.blue   .cbtn.live { background: var(--blue-bg); color: var(--blue); }
+.blue   .cbtn.live { background: var(--blue-bg);   color: var(--blue);   }
 .orange .cbtn.live { background: var(--orange-bg); color: var(--orange); }
-.green  .cbtn.live { background: var(--green-bg);  color: var(--green); }
+.green  .cbtn.live { background: var(--green-bg);  color: var(--green);  }
 
 .blue   .cbtn.live:hover { background: rgba(26, 115, 232, 0.15); }
 .orange .cbtn.live:hover { background: rgba(230, 81, 0, 0.15); }
