@@ -21,7 +21,6 @@ function updateThemeIcon(theme) {
     themeIcon.textContent = theme === 'dark' ? 'light_mode' : 'dark_mode';
 }
 
-
 // 2. Define projects
 const myProjects = [
     {
@@ -126,7 +125,6 @@ function renderProjects() {
     myProjects.forEach(proj => {
         const tagsHtml = proj.tags.map(tag => `<span class="tag ${tag.class}">${tag.text}</span>`).join('');
 
-        // Removed the extra .card-row wrapper so flexbox works correctly
         const cardHtml = `
         <div class="project-card ${proj.theme}">
             <div class="card-icon"><span class="material-icons-round">${proj.icon}</span></div>
