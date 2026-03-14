@@ -46,14 +46,18 @@ const myProjects = [
         codeLink: "https://github.com/Gorupa/pdf-tools"
     },
     {
-        category: "browser",
+        category: "Finance",
         theme: "blue",
         icon: "account_balance_wallet",
         title: "Cashroute",
-        desc: "Track your personal spending and maintain a defined system for categorizing purchases securely in your browser.",
+        desc: "
+
+    A clean, fast redirection interface for transferring money from digital wallets to your bank account. CashRoute does not process payments — it simply connects you to the right gateway.
+
+.",
         tags: [
             { class: "tag-a", text: "Finance" },
-            { class: "tag-n", text: "Expense Tracker" },
+            { class: "tag-n", text: "Wallet Transfer" },
             { class: "tag-n", text: "100% Local" }
         ],
         liveLink: "https://cashroute-deh.pages.dev/",
