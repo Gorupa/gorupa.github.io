@@ -74,14 +74,16 @@ body {
     color: var(--text-main);
     cursor: pointer;
     display: flex; align-items: center;
+    transition: color 0.2s;
 }
+.icon-btn:hover { color: var(--accent); }
 .text-link {
     color: var(--text-main);
     text-decoration: none;
     font-size: 0.9rem;
     font-weight: 500;
     border-bottom: 1px solid transparent;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, color 0.2s;
 }
 .text-link:hover { border-color: var(--text-main); }
 
@@ -92,7 +94,7 @@ body {
     color: var(--text-muted);
     margin-bottom: 16px;
 }
-.handle { font-family: monospace; font-size: 0.9em; }
+.handle { font-family: 'DM Mono', monospace; font-size: 0.9em; }
 .manifesto {
     font-family: 'Newsreader', serif;
     font-size: clamp(2rem, 5vw, 3rem);
@@ -176,6 +178,7 @@ body {
     display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px;
 }
 .tag {
+    font-family: 'DM Mono', monospace;
     font-size: 0.75rem;
     font-weight: 500;
     padding: 4px 10px;
