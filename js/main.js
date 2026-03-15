@@ -44,10 +44,10 @@ const myProjects = [
     },
     {
         category: "browser",
-        icon: "forum",
+        icon: "gavel",
         title: "Vaad",
-        desc: "A minimal, privacy-first platform for structured arguments and debates. Designed to help organize thoughts, reasoning, and discussions entirely on your device.",
-        tags: ["Debate", "Local-First", "Utility"],
+        desc: "Track Indian court cases instantly. Search by CNR number, party name or advocate name. Clean results, next hearing date front and centre. Free, no ads, open source.",
+        tags: ["Legal Tech", "Court Tracker", "Open Source"],
         liveLink: "https://vaad.pages.dev/",
         codeLink: "https://github.com/Gorupa/vaad"
     },
