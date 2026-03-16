@@ -29,7 +29,7 @@ const myProjects = [
         icon: "account_balance",
         title: "ecourts-js",
         desc: "A powerful, open-source Node.js library for scraping and extracting Indian court case data directly from the official eCourts portal. Built specifically for civic tech, legal research, and automated case tracking.",
-        tags: ["Node.js", "Web Scraping", "Legal Tech"],
+        tags: ["Node.js", "Web Scraping", "Zktls" "NPM",],
         codeLink: "https://github.com/Gorupa/ecourts-js"
     },
     {
@@ -37,7 +37,7 @@ const myProjects = [
         icon: "verified_user",
         title: "India Validators",
         desc: "Zero-dependency validation library for Indian formats (Aadhaar, PAN, GSTIN, UPI, IFSC, etc.). Lightweight, fast, and works seamlessly in Node.js and the browser.",
-        tags: ["JavaScript", "Validation", "NPM"],
+        tags: ["JavaScript", "Validation", "CDN"],
         liveLink: "https://gorupa.github.io/india-validators/demo/",
         codeLink: "https://github.com/Gorupa/india-validators",
         articleLink: "https://dev.to/gorupa/i-built-a-zero-dependency-validation-library-for-every-indian-developer-55ck"
