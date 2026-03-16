@@ -29,7 +29,7 @@ const myProjects = [
         icon: "account_balance",
         title: "ecourts-js",
         desc: "A powerful, open-source Node.js library for scraping and extracting Indian court case data directly from the official eCourts portal. Built specifically for civic tech, legal research, and automated case tracking.",
-        tags: ["Node.js", "Web Scraping", "Zktls" "NPM",],
+        tags: ["Node.js", "Web Scraping", "NPM", "zkTLS"],
         codeLink: "https://github.com/Gorupa/ecourts-js"
     },
     {
@@ -37,7 +37,7 @@ const myProjects = [
         icon: "verified_user",
         title: "India Validators",
         desc: "Zero-dependency validation library for Indian formats (Aadhaar, PAN, GSTIN, UPI, IFSC, etc.). Lightweight, fast, and works seamlessly in Node.js and the browser.",
-        tags: ["JavaScript", "Validation", "CDN"],
+        tags: ["JavaScript", "Validation", "NPM"],
         liveLink: "https://gorupa.github.io/india-validators/demo/",
         codeLink: "https://github.com/Gorupa/india-validators",
         articleLink: "https://dev.to/gorupa/i-built-a-zero-dependency-validation-library-for-every-indian-developer-55ck"
@@ -47,7 +47,7 @@ const myProjects = [
         icon: "insights",
         title: "PulseKit",
         desc: "A pioneering JavaScript library for interacting with PhonePe Pulse data. The first open-source tool to simplify visualizing India's digital payment trends.",
-        tags: ["JavaScript", "Data API", "NPM"],
+        tags: ["JavaScript", "Data API", "CDN"],
         liveLink: "https://gorupa.github.io/pulsekit/demo/",
         codeLink: "https://github.com/Gorupa/pulsekit",
         articleLink: "https://dev.to/gorupa/i-built-the-first-open-source-js-library-for-phonepe-pulse-datapublished-5306"
