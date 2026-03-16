@@ -26,12 +26,21 @@ function updateThemeIcon(theme) {
 const myProjects = [
     {
         category: "library",
+        icon: "account_balance",
+        title: "ecourts-js",
+        desc: "A powerful, open-source Node.js library for scraping and extracting Indian court case data directly from the official eCourts portal. Built specifically for civic tech, legal research, and automated case tracking.",
+        tags: ["Node.js", "Web Scraping", "Legal Tech"],
+        codeLink: "https://github.com/Gorupa/ecourts-js"
+    },
+    {
+        category: "library",
         icon: "verified_user",
         title: "India Validators",
         desc: "Zero-dependency validation library for Indian formats (Aadhaar, PAN, GSTIN, UPI, IFSC, etc.). Lightweight, fast, and works seamlessly in Node.js and the browser.",
         tags: ["JavaScript", "Validation", "NPM"],
         liveLink: "https://gorupa.github.io/india-validators/demo/",
-        codeLink: "https://github.com/Gorupa/india-validators"
+        codeLink: "https://github.com/Gorupa/india-validators",
+        articleLink: "https://dev.to/gorupa/i-built-a-zero-dependency-validation-library-for-every-indian-developer-55ck"
     },
     {
         category: "library",
@@ -40,7 +49,8 @@ const myProjects = [
         desc: "A pioneering JavaScript library for interacting with PhonePe Pulse data. The first open-source tool to simplify visualizing India's digital payment trends.",
         tags: ["JavaScript", "Data API", "NPM"],
         liveLink: "https://gorupa.github.io/pulsekit/demo/",
-        codeLink: "https://github.com/Gorupa/pulsekit"
+        codeLink: "https://github.com/Gorupa/pulsekit",
+        articleLink: "https://dev.to/gorupa/i-built-the-first-open-source-js-library-for-phonepe-pulse-datapublished-5306"
     },
     {
         category: "browser",
@@ -106,6 +116,18 @@ function renderProjects() {
 
     myProjects.forEach(proj => {
         const tagsHtml = proj.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+        
+        // Dynamically build links based on what is provided
+        let linksHtml = '';
+        if (proj.liveLink) {
+            linksHtml += `<a href="${proj.liveLink}" target="_blank" rel="noopener">Live Demo <span class="material-icons-round">north_east</span></a>`;
+        }
+        if (proj.articleLink) {
+            linksHtml += `<a href="${proj.articleLink}" target="_blank" rel="noopener">Read Article <span class="material-icons-round">article</span></a>`;
+        }
+        if (proj.codeLink) {
+            linksHtml += `<a href="${proj.codeLink}" target="_blank" rel="noopener">Source Code <span class="material-icons-round">code</span></a>`;
+        }
 
         const cardHtml = `
         <article class="project-item">
@@ -118,12 +140,7 @@ function renderProjects() {
             </div>
             <p class="project-desc">${proj.desc}</p>
             <div class="project-links">
-                <a href="${proj.liveLink}" target="_blank" rel="noopener">
-                    Live Demo <span class="material-icons-round">north_east</span>
-                </a>
-                <a href="${proj.codeLink}" target="_blank" rel="noopener">
-                    Source Code <span class="material-icons-round">code</span>
-                </a>
+                ${linksHtml}
             </div>
         </article>
         `;
