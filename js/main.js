@@ -30,6 +30,7 @@ const myProjects = [
         title: "ecourts-js",
         desc: "A powerful, open-source Node.js library for scraping and extracting Indian court case data directly from the official eCourts portal. Built specifically for civic tech, legal research, and automated case tracking.",
         tags: ["Node.js", "Web Scraping", "NPM", "zkTLS"],
+        liveLink: "https://gorupa.github.io/vaad-explainer/#",
         codeLink: "https://github.com/Gorupa/ecourts-js"
     },
     {
@@ -51,6 +52,15 @@ const myProjects = [
         liveLink: "https://gorupa.github.io/pulsekit/demo/",
         codeLink: "https://github.com/Gorupa/pulsekit",
         articleLink: "https://dev.to/gorupa/i-built-the-first-open-source-js-library-for-phonepe-pulse-datapublished-5306"
+    },
+    {
+        category: "browser",
+        icon: "fingerprint",
+        title: "zkTLS Proof Verifier",
+        desc: "A lightweight web tool to inspect and verify zkTLS proof files directly in the browser. Upload a proof.json file and view its metadata such as server source, timestamp, and proof hash.",
+        tags: ["Blockchain", "Cryptography", "zkTLS"],
+        liveLink: "https://gorupa.github.io/zktls-proof-verifier/",
+        codeLink: "https://github.com/Gorupa/zktls-proof-verifier"
     },
     {
         category: "browser",
