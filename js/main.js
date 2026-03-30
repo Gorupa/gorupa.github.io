@@ -26,6 +26,16 @@ function updateThemeIcon(theme) {
 const myProjects = [
     {
         category: "library",
+        icon: "palette",
+        title: "KABOOM! UI",
+        desc: "KABOOM! UI is a purely nostalgic, 100% CSS design system ripped straight from the pages of vintage comic books, Pop Art posters, and the gloriously chaotic 90s. No frameworks. No dependencies. No apologies. Just raw, inky, halftone-dotted style.",
+        tags: ["CSS", "UI Kit", "Design System"],
+        liveLink: "https://kaboom-ui-kit.pages.dev/",
+        codeLink: "https://github.com/Gorupa/kaboom-ui-kit",
+        articleLink: "https://dev.to/gorupa/i-was-tired-of-boring-uis-so-i-built-a-css-framework-straight-out-of-a-1962-comic-book-mc1"
+    },
+    {
+        category: "library",
         icon: "account_balance",
         title: "ecourts-js",
         desc: "A powerful, open-source Node.js library for scraping and extracting Indian court case data directly from the official eCourts portal. Built specifically for civic tech, legal research, and automated case tracking.",
@@ -52,6 +62,24 @@ const myProjects = [
         liveLink: "https://gorupa.github.io/pulsekit/demo/",
         codeLink: "https://github.com/Gorupa/pulsekit",
         articleLink: "https://dev.to/gorupa/i-built-the-first-open-source-js-library-for-phonepe-pulse-datapublished-5306"
+    },
+    {
+        category: "browser",
+        icon: "calculate",
+        title: "Smart Calc",
+        desc: "A human-centric, offline-first EMI and standard calculator built with radical transparency.",
+        tags: ["Calculator", "Offline-First", "Utility"],
+        liveLink: "https://gorupa.github.io/smart-calc/",
+        codeLink: "https://github.com/Gorupa/smart-calc"
+    },
+    {
+        category: "browser",
+        icon: "inventory_2",
+        title: "The Collector's Archives",
+        desc: "Most physical collections — from a 1918 Silver Rupee to a Holographic Charizard — spend their lives in dark boxes, binders, and forgotten spreadsheets. The Collector's Archives is the antidote.",
+        tags: ["Archive", "Collection", "Utility"],
+        liveLink: "https://artifact-archive.pages.dev/",
+        codeLink: "https://github.com/Gorupa/artifact-archive"
     },
     {
         category: "browser",
