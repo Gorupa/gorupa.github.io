@@ -65,6 +65,22 @@ const myProjects = [
     },
     {
         category: "browser",
+        icon: "payments",
+        title: "ClearFin",
+        desc: "A minimalist, privacy-first personal finance dashboard. Keep your financial data clear, accessible, and entirely under your own control.",
+        tags: ["Finance", "Local-First", "Utility"],
+        liveLink: "https://clearfin.pages.dev/"
+    },
+    {
+        category: "browser",
+        icon: "library_music",
+        title: "OpenTune (Contribution)",
+        desc: "Core contributions to OpenTune, an open-source, ad-free music streaming client. Focused on refining the user experience and maintaining accessible, community-driven software.",
+        tags: ["Open Source", "Music", "Contribution"],
+        liveLink: "https://opentune.netlify.app/"
+    },
+    {
+        category: "browser",
         icon: "calculate",
         title: "Smart Calc",
         desc: "A human-centric, offline-first EMI and standard calculator built with radical transparency.",
