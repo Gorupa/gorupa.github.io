@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code&Coffee India | Support Open Source</title>
+    <title>Code & Coffee India | Support Open Source</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
@@ -146,7 +146,7 @@
     </section>
 
     <div id="desktopModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center px-4">
-        <div class="bg-white rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl transform scale-100 transition-transform relative">
+        <div class="bg-white rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl relative">
             <button onclick="closeModals()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800">
                 <span class="material-symbols-outlined">close</span>
             </button>
@@ -157,13 +157,13 @@
                 <img id="qrCodeImage" src="" alt="UPI QR Code" class="w-48 h-48 mx-auto mix-blend-multiply">
             </div>
             
-            <button onclick="triggerTallyStep()" class="w-full bg-coffeeMedium hover:bg-coffeeDark text-white font-bold py-3 rounded-xl transition">
+            <button onclick="triggerVerificationStep()" class="w-full bg-coffeeMedium hover:bg-coffeeDark text-white font-bold py-3 rounded-xl transition">
                 I have completed the payment
             </button>
         </div>
     </div>
 
-    <div id="tallyModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center px-4">
+    <div id="verificationModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center px-4">
         <div class="bg-white rounded-3xl p-8 max-w-md w-full text-center shadow-2xl relative">
             <button onclick="closeModals()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800">
                 <span class="material-symbols-outlined">close</span>
@@ -175,15 +175,11 @@
             <p class="text-gray-600 mb-6">Your support means everything. Let's get you on the Wall of Fame.</p>
             
             <div class="bg-coffeeLight/20 p-5 rounded-2xl border border-coffeeMedium/20 mb-6 text-left">
-                <p class="text-sm text-gray-700 font-medium mb-2">We need:</p>
-                <ul class="text-sm text-gray-600 space-y-2 list-disc list-inside">
-                    <li>Your Name or Username</li>
-                    <li>A short message for the wall</li>
-                    <li>Optional: Your profile photo link</li>
-                </ul>
+                <p class="text-sm text-gray-700 font-medium mb-2">Next Step:</p>
+                <p class="text-sm text-gray-600">Please provide your UTR number (for verification) and the name/message you want displayed on the wall.</p>
             </div>
             
-            <a href="https://tally.so/r/your-tally-form-id" target="_blank" onclick="closeModals()" class="inline-flex justify-center items-center w-full bg-accentBrand hover:bg-[#ff3b41] text-white font-bold py-4 rounded-xl transition shadow-lg text-lg">
+            <a href="https://forms.gle/7XbQynseoybTtQaF9" target="_blank" onclick="closeModals()" class="inline-flex justify-center items-center w-full bg-accentBrand hover:bg-[#ff3b41] text-white font-bold py-4 rounded-xl transition shadow-lg text-lg">
                 Fill Details for the Wall
                 <span class="material-symbols-outlined ml-2">arrow_forward</span>
             </a>
@@ -191,8 +187,9 @@
     </div>
 
     <script>
+        // YOUR LIVE CONFIGURATION
         const UPI_ID = "7339992788@upi"; 
-        const PAYEE_NAME = "Code And Coffee"; // Keep this clean and professional
+        const PAYEE_NAME = "Code And Coffee"; 
 
         function setAmount(amt, btnElement) {
             document.getElementById('customAmount').value = amt;
@@ -222,9 +219,9 @@
                 // On mobile, force open the UPI app natively
                 window.location.href = upiString;
                 
-                // Show the Tally form modal when they return to the browser
+                // Show the Verification form modal when they return to the browser
                 setTimeout(() => {
-                    triggerTallyStep();
+                    triggerVerificationStep();
                 }, 2500);
             } else {
                 // On desktop, generate a QR code using a free API
@@ -234,14 +231,14 @@
             }
         }
 
-        function triggerTallyStep() {
+        function triggerVerificationStep() {
             document.getElementById('desktopModal').classList.add('hidden');
-            document.getElementById('tallyModal').classList.remove('hidden');
+            document.getElementById('verificationModal').classList.remove('hidden');
         }
 
         function closeModals() {
             document.getElementById('desktopModal').classList.add('hidden');
-            document.getElementById('tallyModal').classList.add('hidden');
+            document.getElementById('verificationModal').classList.add('hidden');
         }
     </script>
 </body>
