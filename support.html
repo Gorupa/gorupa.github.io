@@ -244,80 +244,88 @@
             document.getElementById('verificationModal').classList.add('hidden');
         }
 
-        // --- 2. LOCAL CSV AUTOMATION ENGINE ---
-        const CSV_URL = 'backers.csv'; 
+        // --- 2. GOOGLE SHEETS AUTOMATION ENGINE ---
+        
+        // YOUR LIVE PUBLIC CSV LINK
+        const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRNQ3glMmT2CjxSu_hcy-XV-dTel4ed_CTjbtssg-5HsP9bb6i3G1NjHcmegkuVPMIUyN_d4j6f_tlz/pub?output=csv'; 
 
         async function loadWallOfLove() {
+            // These default cards will ALWAYS show up first
+            let htmlContent = `
+                <div class="glass-card shadow-sm rounded-2xl p-4 flex items-center gap-4 w-[300px] flex-shrink-0 border border-gray-200">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Rahul" class="w-14 h-14 rounded-full bg-coffeeLight p-1" alt="Avatar">
+                    <div class="flex-1 whitespace-normal">
+                        <h4 class="font-bold text-coffeeDark leading-tight">Rahul Singh</h4>
+                        <p class="text-xs text-gray-500 mt-0.5 italic">"Vaad is a lifesaver, keep it up!"</p>
+                    </div>
+                </div>
+                <div class="glass-card shadow-sm rounded-2xl p-4 flex items-center gap-4 w-[300px] flex-shrink-0 border border-gray-200">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Priya" class="w-14 h-14 rounded-full bg-coffeeLight p-1" alt="Avatar">
+                    <div class="flex-1 whitespace-normal">
+                        <h4 class="font-bold text-coffeeDark leading-tight">Priya M.</h4>
+                        <p class="text-xs text-gray-500 mt-0.5 italic">"Coffee for the Opentune dev! ☕"</p>
+                    </div>
+                </div>
+                <div class="glass-card shadow-sm rounded-2xl p-4 flex items-center gap-4 w-[300px] flex-shrink-0 border border-accentBrand/20 bg-red-50/30">
+                    <div class="w-14 h-14 rounded-full bg-accentBrand text-white flex items-center justify-center text-xl font-bold shadow-inner">✨</div>
+                    <div class="flex-1 whitespace-normal">
+                        <h4 class="font-bold text-coffeeDark leading-tight">Your Name Here</h4>
+                        <p class="text-xs text-gray-500 mt-0.5 font-medium">Claim your spot on the wall!</p>
+                    </div>
+                </div>
+            `;
+
             try {
-                // Fetch the CSV file with a cache-buster
-                const response = await fetch(CSV_URL + '?v=' + new Date().getTime());
-                if (!response.ok) {
-                    console.log("No backers.csv found yet.");
-                    document.getElementById('marqueeContentContainer').innerHTML = `<p class="text-gray-500 text-sm mt-4">Be the first to claim a spot!</p>`;
-                    return;
-                }
-                
-                const data = await response.text();
-                
-                // Parse CSV rows safely handling quotes
-                const rows = data.split('\n').map(row => {
-                    const matches = row.match(/(\s*"[^"]+"\s*|\s*[^,]+|,)(?=,|$)/g);
-                    if (!matches) return [];
-                    return matches.map(m => m.replace(/^,/, '').replace(/(^"|"$)/g, '').trim());
-                });
-                
-                if (rows.length < 2) return; 
+                // Fetch the Google Sheets CSV with a cache buster
+                const response = await fetch(CSV_URL + '&v=' + new Date().getTime());
+                if (response.ok) {
+                    const data = await response.text();
+                    const rows = data.split('\n').map(row => {
+                        const matches = row.match(/(\s*"[^"]+"\s*|\s*[^,]+|,)(?=,|$)/g);
+                        if (!matches) return [];
+                        return matches.map(m => m.replace(/^,/, '').replace(/(^"|"$)/g, '').trim());
+                    });
+                    
+                    if (rows.length >= 2) {
+                        const headers = rows[0].map(h => h.toLowerCase());
+                        const nameIndex = headers.findIndex(h => h.includes('name') || h.includes('display'));
+                        const msgIndex = headers.findIndex(h => h.includes('message'));
+                        const verifiedIndex = headers.findIndex(h => h.includes('verified')); 
 
-                const headers = rows[0].map(h => h.toLowerCase());
-                
-                const nameIndex = headers.findIndex(h => h.includes('display name') || h.includes('name'));
-                const msgIndex = headers.findIndex(h => h.includes('message'));
-                const verifiedIndex = headers.findIndex(h => h.includes('verified')); 
+                        for (let i = 1; i < rows.length; i++) {
+                            const row = rows[i];
+                            if (!row || row.length < 2) continue;
 
-                let htmlContent = '';
-                let validCardsCount = 0;
+                            const name = row[nameIndex] ? row[nameIndex] : 'Anonymous';
+                            const message = row[msgIndex] ? row[msgIndex] : 'Fueling the code! ☕';
+                            const verified = verifiedIndex > -1 && row[verifiedIndex] ? row[verifiedIndex].toUpperCase() : '';
 
-                for (let i = 1; i < rows.length; i++) {
-                    const row = rows[i];
-                    if (!row || row.length < 2) continue;
-
-                    const name = row[nameIndex] ? row[nameIndex] : 'Anonymous';
-                    const message = row[msgIndex] ? row[msgIndex] : 'Fueling the code! ☕';
-                    const verified = verifiedIndex > -1 && row[verifiedIndex] ? row[verifiedIndex].toUpperCase() : '';
-
-                    // Display only if verified flag is YES
-                    if (verified === 'YES' && name) {
-                        const avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(name)}`;
-
-                        htmlContent += `
-                        <div class="glass-card shadow-sm rounded-2xl p-4 flex items-center gap-4 w-[300px] flex-shrink-0 border border-gray-200 transition-transform hover:scale-105">
-                            <img src="${avatarUrl}" class="w-14 h-14 rounded-full bg-coffeeLight p-1" alt="Avatar">
-                            <div class="flex-1 whitespace-normal">
-                                <h4 class="font-bold text-coffeeDark leading-tight">${name}</h4>
-                                <p class="text-xs text-gray-500 mt-0.5 italic">"${message}"</p>
-                            </div>
-                        </div>
-                        `;
-                        validCardsCount++;
+                            // Append real backers right after the default ones
+                            if (verified === 'YES' && name) {
+                                const avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(name)}`;
+                                htmlContent += `
+                                <div class="glass-card shadow-sm rounded-2xl p-4 flex items-center gap-4 w-[300px] flex-shrink-0 border border-gray-200 transition-transform hover:scale-105">
+                                    <img src="${avatarUrl}" class="w-14 h-14 rounded-full bg-coffeeLight p-1" alt="Avatar">
+                                    <div class="flex-1 whitespace-normal">
+                                        <h4 class="font-bold text-coffeeDark leading-tight">${name}</h4>
+                                        <p class="text-xs text-gray-500 mt-0.5 italic">"${message}"</p>
+                                    </div>
+                                </div>
+                                `;
+                            }
+                        }
                     }
                 }
-
-                if (validCardsCount > 0) {
-                    const marqueeContainer = document.getElementById('marqueeContentContainer');
-                    marqueeContainer.innerHTML = `
-                        <div class="flex gap-6 pl-6">${htmlContent}</div>
-                        <div class="flex gap-6 pl-6">${htmlContent}</div>
-                    `;
-                } else {
-                    document.getElementById('marqueeContentContainer').innerHTML = `<p class="text-gray-500 text-sm mt-4">Be the first to claim a spot!</p>`;
-                }
-
             } catch (error) {
-                console.error("Error loading Wall of Love:", error);
+                console.error("Error fetching live backers:", error);
             }
+
+            // Always render the final compiled list (Defaults + Real Backers)
+            renderMarquee(htmlContent);
         }
 
-        window.addEventListener('DOMContentLoaded', loadWallOfLove);
-    </script>
-</body>
-</html>
+        function renderMarquee(content) {
+            const marqueeContainer = document.getElementById('marqueeContentContainer');
+            marqueeContainer.innerHTML = `
+                <div class="flex gap-6 pl-6">${content}</div>
+  
