@@ -35,8 +35,6 @@
     <style>
         body { background-color: #FAFAFA; color: #2D3748; }
         .glass-card { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); }
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         .marquee-container { overflow: hidden; white-space: nowrap; width: 100%; position: relative; }
         .marquee-content { display: inline-flex; gap: 1.5rem; padding-right: 1.5rem; }
     </style>
@@ -65,19 +63,19 @@
         
         <div class="grid grid-cols-3 gap-3 mb-6">
             <button onclick="setAmount(50, this)" class="tier-btn border-2 border-gray-200 hover:border-coffeeMedium rounded-2xl py-4 font-bold transition flex flex-col items-center">
-                <span class="text-2xl mb-1">☕</span> ₹50
+                <span class="text-2xl mb-1">â˜•</span> â‚¹50
             </button>
             <button onclick="setAmount(150, this)" class="tier-btn border-2 border-coffeeMedium bg-coffeeLight/30 text-coffeeDark rounded-2xl py-4 font-bold transition flex flex-col items-center relative">
                 <div class="absolute -top-3 bg-accentBrand text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-md">Espresso</div>
-                <span class="text-2xl mb-1">🚀</span> ₹150
+                <span class="text-2xl mb-1">ðŸš€</span> â‚¹150
             </button>
             <button onclick="setAmount(500, this)" class="tier-btn border-2 border-gray-200 hover:border-coffeeMedium rounded-2xl py-4 font-bold transition flex flex-col items-center">
-                <span class="text-2xl mb-1">💻</span> ₹500
+                <span class="text-2xl mb-1">ðŸ’»</span> â‚¹500
             </button>
         </div>
 
         <div class="relative mb-8">
-            <span class="absolute left-5 top-3.5 text-gray-400 font-bold text-xl">₹</span>
+            <span class="absolute left-5 top-3.5 text-gray-400 font-bold text-xl">â‚¹</span>
             <input type="number" id="customAmount" value="150" class="w-full bg-gray-50 border-2 border-gray-100 focus:border-coffeeMedium outline-none px-10 py-4 rounded-xl text-xl font-bold transition text-coffeeDark" placeholder="Custom Amount">
         </div>
 
@@ -91,7 +89,7 @@
     </main>
 
     <section class="max-w-3xl w-full text-center mb-10 px-4">
-        <h3 class="text-3xl font-bold text-coffeeDark mb-4">The Wall of Love 🧱</h3>
+        <h3 class="text-3xl font-bold text-coffeeDark mb-4">The Wall of Love ðŸ§±</h3>
         <p class="text-gray-600 mb-6">Every line of open-source code is fueled by the community behind it. The Wall of Love is a permanent monument to the backers who keep the servers humming. Here is how to cement your legacy:</p>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left max-w-2xl mx-auto">
@@ -113,10 +111,56 @@
         </div>
     </section>
 
-    <section class="w-full max-w-[100vw] mb-12 mt-12">
+    <section class="w-full max-w-[100vw] mb-12 mt-8">
         <div class="marquee-container py-4">
-            <div id="marqueeContentContainer" class="marquee-content animate-scroll-left">
+            <div class="marquee-content animate-scroll-left">
+                <div class="flex gap-6">
+                    <div class="glass-card shadow-sm rounded-2xl p-4 flex items-center gap-4 w-[300px] flex-shrink-0 border border-gray-200">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Rahul" class="w-14 h-14 rounded-full bg-coffeeLight p-1" alt="Avatar">
+                        <div class="flex-1 whitespace-normal">
+                            <h4 class="font-bold text-coffeeDark leading-tight">Rahul Singh</h4>
+                            <p class="text-xs text-gray-500 mt-0.5 italic">"Vaad is a lifesaver, keep it up!"</p>
+                        </div>
+                    </div>
+                    <div class="glass-card shadow-sm rounded-2xl p-4 flex items-center gap-4 w-[300px] flex-shrink-0 border border-gray-200">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Priya" class="w-14 h-14 rounded-full bg-coffeeLight p-1" alt="Avatar">
+                        <div class="flex-1 whitespace-normal">
+                            <h4 class="font-bold text-coffeeDark leading-tight">Priya M.</h4>
+                            <p class="text-xs text-gray-500 mt-0.5 italic">"Coffee for the Opentune dev! â˜•"</p>
+                        </div>
+                    </div>
+                    <div class="glass-card shadow-sm rounded-2xl p-4 flex items-center gap-4 w-[300px] flex-shrink-0 border border-accentBrand/20 bg-red-50/30">
+                        <div class="w-14 h-14 rounded-full bg-accentBrand text-white flex items-center justify-center text-xl font-bold shadow-inner">âœ¨</div>
+                        <div class="flex-1 whitespace-normal">
+                            <h4 class="font-bold text-coffeeDark leading-tight">Your Name Here</h4>
+                            <p class="text-xs text-gray-500 mt-0.5 font-medium">Claim your spot on the wall!</p>
+                        </div>
+                    </div>
                 </div>
+                <div class="flex gap-6 pl-6">
+                    <div class="glass-card shadow-sm rounded-2xl p-4 flex items-center gap-4 w-[300px] flex-shrink-0 border border-gray-200">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Rahul" class="w-14 h-14 rounded-full bg-coffeeLight p-1" alt="Avatar">
+                        <div class="flex-1 whitespace-normal">
+                            <h4 class="font-bold text-coffeeDark leading-tight">Rahul Singh</h4>
+                            <p class="text-xs text-gray-500 mt-0.5 italic">"Vaad is a lifesaver, keep it up!"</p>
+                        </div>
+                    </div>
+                    <div class="glass-card shadow-sm rounded-2xl p-4 flex items-center gap-4 w-[300px] flex-shrink-0 border border-gray-200">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Priya" class="w-14 h-14 rounded-full bg-coffeeLight p-1" alt="Avatar">
+                        <div class="flex-1 whitespace-normal">
+                            <h4 class="font-bold text-coffeeDark leading-tight">Priya M.</h4>
+                            <p class="text-xs text-gray-500 mt-0.5 italic">"Coffee for the Opentune dev! â˜•"</p>
+                        </div>
+                    </div>
+                    <div class="glass-card shadow-sm rounded-2xl p-4 flex items-center gap-4 w-[300px] flex-shrink-0 border border-accentBrand/20 bg-red-50/30">
+                        <div class="w-14 h-14 rounded-full bg-accentBrand text-white flex items-center justify-center text-xl font-bold shadow-inner">âœ¨</div>
+                        <div class="flex-1 whitespace-normal">
+                            <h4 class="font-bold text-coffeeDark leading-tight">Your Name Here</h4>
+                            <p class="text-xs text-gray-500 mt-0.5 font-medium">Claim your spot on the wall!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -184,16 +228,18 @@
     </div>
 
     <script>
-        // --- 1. PAYMENT ROUTING ENGINE ---
+        // LIVE CONFIGURATION
         const UPI_ID = "7339992788@upi"; 
         const PAYEE_NAME = "Code And Coffee"; 
 
         function setAmount(amt, btnElement) {
             document.getElementById('customAmount').value = amt;
+            
             document.querySelectorAll('.tier-btn').forEach(btn => {
                 btn.classList.remove('border-coffeeMedium', 'bg-coffeeLight/30', 'text-coffeeDark');
                 btn.classList.add('border-gray-200');
             });
+            
             btnElement.classList.add('border-coffeeMedium', 'bg-coffeeLight/30', 'text-coffeeDark');
             btnElement.classList.remove('border-gray-200');
         }
@@ -201,7 +247,7 @@
         function processPayment() {
             const amount = document.getElementById('customAmount').value;
             if(!amount || amount < 10) {
-                alert("Please enter a valid amount (Minimum ₹10).");
+                alert("Please enter a valid amount (Minimum â‚¹10).");
                 return;
             }
 
@@ -209,9 +255,13 @@
             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
             if (isMobile) {
+                // Mobile: Open App, wait, then ask if they paid
                 window.location.href = upiString;
-                setTimeout(() => { showConfirmationStep(); }, 3500); 
+                setTimeout(() => {
+                    showConfirmationStep();
+                }, 3000); // Gives them time to switch back from GPay
             } else {
+                // Desktop: Show QR Code
                 const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiString)}`;
                 document.getElementById('qrCodeImage').src = qrApiUrl;
                 document.getElementById('desktopModal').classList.remove('hidden');
@@ -233,117 +283,6 @@
             document.getElementById('confirmationModal').classList.add('hidden');
             document.getElementById('verificationModal').classList.add('hidden');
         }
-
-        // --- 2. GOOGLE SHEETS AUTOMATION ENGINE ---
-        
-        // YOUR LIVE PUBLIC CSV LINK
-        const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRNQ3glMmT2CjxSu_hcy-XV-dTel4ed_CTjbtssg-5HsP9bb6i3G1NjHcmegkuVPMIUyN_d4j6f_tlz/pub?output=csv'; 
-
-        // The default cards that MUST show up instantly
-        const DEFAULT_CARDS = `
-            <div class="glass-card shadow-sm rounded-2xl p-4 flex items-center gap-4 w-[300px] flex-shrink-0 border border-gray-200">
-                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Rahul" class="w-14 h-14 rounded-full bg-coffeeLight p-1" alt="Avatar">
-                <div class="flex-1 whitespace-normal">
-                    <h4 class="font-bold text-coffeeDark leading-tight">Rahul Singh</h4>
-                    <p class="text-xs text-gray-500 mt-0.5 italic">"Vaad is a lifesaver, keep it up!"</p>
-                </div>
-            </div>
-            <div class="glass-card shadow-sm rounded-2xl p-4 flex items-center gap-4 w-[300px] flex-shrink-0 border border-gray-200">
-                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Priya" class="w-14 h-14 rounded-full bg-coffeeLight p-1" alt="Avatar">
-                <div class="flex-1 whitespace-normal">
-                    <h4 class="font-bold text-coffeeDark leading-tight">Priya M.</h4>
-                    <p class="text-xs text-gray-500 mt-0.5 italic">"Coffee for the Opentune dev! ☕"</p>
-                </div>
-            </div>
-            <div class="glass-card shadow-sm rounded-2xl p-4 flex items-center gap-4 w-[300px] flex-shrink-0 border border-accentBrand/20 bg-red-50/30">
-                <div class="w-14 h-14 rounded-full bg-accentBrand text-white flex items-center justify-center text-xl font-bold shadow-inner">✨</div>
-                <div class="flex-1 whitespace-normal">
-                    <h4 class="font-bold text-coffeeDark leading-tight">Your Name Here</h4>
-                    <p class="text-xs text-gray-500 mt-0.5 font-medium">Claim your spot on the wall!</p>
-                </div>
-            </div>
-        `;
-
-        // Function to actually draw the cards on the screen
-        function renderWall(extraCards = '') {
-            const container = document.getElementById('marqueeContentContainer');
-            if (!container) return;
-            const fullContent = DEFAULT_CARDS + extraCards;
-            container.innerHTML = `
-                <div class="flex gap-6 pl-6">${fullContent}</div>
-                <div class="flex gap-6 pl-6">${fullContent}</div>
-            `;
-        }
-
-        // A rock-solid CSV parser that won't freeze the browser
-        function parseCSVRow(str) {
-            let arr = [];
-            let quote = false;
-            let col = '';
-            for (let i = 0; i < str.length; i++) {
-                let cc = str[i], nc = str[i+1];
-                if (cc === '"' && quote && nc === '"') { col += cc; i++; continue; }
-                if (cc === '"') { quote = !quote; continue; }
-                if (cc === ',' && !quote) { arr.push(col); col = ''; continue; }
-                col += cc;
-            }
-            arr.push(col);
-            return arr;
-        }
-
-        async function loadLiveBackers() {
-            // 1. INSTANTLY render defaults so the user NEVER sees a blank screen
-            renderWall('');
-
-            try {
-                // 2. Fetch the live data in the background
-                const url = CSV_URL + '&v=' + new Date().getTime();
-                const response = await fetch(url);
-                if (!response.ok) return;
-
-                const text = await response.text();
-                const lines = text.split('\n').filter(line => line.trim().length > 0);
-                
-                if (lines.length < 2) return; // Only headers, no data yet
-
-                const headers = parseCSVRow(lines[0]).map(h => h.toLowerCase().trim());
-                const nameIdx = headers.findIndex(h => h.includes('name') || h.includes('display'));
-                const msgIdx = headers.findIndex(h => h.includes('message'));
-                const verIdx = headers.findIndex(h => h.includes('verified'));
-
-                let extraCards = '';
-
-                // Read the rows
-                for (let i = 1; i < lines.length; i++) {
-                    const row = parseCSVRow(lines[i]);
-                    
-                    const name = nameIdx > -1 && row[nameIdx] ? row[nameIdx].trim() : 'Anonymous';
-                    const message = msgIdx > -1 && row[msgIdx] ? row[msgIdx].trim() : 'Fueling the code! ☕';
-                    const verified = verIdx > -1 && row[verIdx] ? row[verIdx].trim().toUpperCase() : '';
-
-                    if (verified === 'YES' && name) {
-                        const avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(name)}`;
-                        extraCards += `
-                        <div class="glass-card shadow-sm rounded-2xl p-4 flex items-center gap-4 w-[300px] flex-shrink-0 border border-gray-200 transition-transform hover:scale-105">
-                            <img src="${avatarUrl}" class="w-14 h-14 rounded-full bg-coffeeLight p-1" alt="Avatar">
-                            <div class="flex-1 whitespace-normal">
-                                <h4 class="font-bold text-coffeeDark leading-tight">${name}</h4>
-                                <p class="text-xs text-gray-500 mt-0.5 italic">"${message}"</p>
-                            </div>
-                        </div>
-                        `;
-                    }
-                }
-
-                // 3. If we found real verified backers, update the wall to include them!
-                if (extraCards.length > 0) {
-                    renderWall(extraCards);
-                }
-
-            } catch (error) {
-                console.error('Could not load live CSV, but default cards are safe:', error);
-            }
-        }
-
-        // Fire the function the second the page loads
-        window.addEventListener('DOMContentLoaded'
+    </script>
+</body>
+</html>
