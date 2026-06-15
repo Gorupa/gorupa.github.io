@@ -116,16 +116,7 @@
     <section class="w-full max-w-[100vw] mb-12 mt-12">
         <div class="marquee-container py-4">
             <div id="marqueeContentContainer" class="marquee-content animate-scroll-left">
-                <div class="flex gap-6 pl-6 opacity-50">
-                    <div class="glass-card shadow-sm rounded-2xl p-4 flex items-center gap-4 w-[300px] flex-shrink-0 border border-gray-200">
-                        <div class="w-14 h-14 rounded-full bg-gray-200 animate-pulse"></div>
-                        <div class="flex-1 space-y-2">
-                            <div class="h-4 bg-gray-200 rounded animate-pulse w-3/4"></div>
-                            <div class="h-3 bg-gray-200 rounded animate-pulse w-full"></div>
-                        </div>
-                    </div>
                 </div>
-            </div>
         </div>
     </section>
 
@@ -248,79 +239,111 @@
         // YOUR LIVE PUBLIC CSV LINK
         const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRNQ3glMmT2CjxSu_hcy-XV-dTel4ed_CTjbtssg-5HsP9bb6i3G1NjHcmegkuVPMIUyN_d4j6f_tlz/pub?output=csv'; 
 
-        async function loadWallOfLove() {
-            // These default cards will ALWAYS show up first
-            let htmlContent = `
-                <div class="glass-card shadow-sm rounded-2xl p-4 flex items-center gap-4 w-[300px] flex-shrink-0 border border-gray-200">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Rahul" class="w-14 h-14 rounded-full bg-coffeeLight p-1" alt="Avatar">
-                    <div class="flex-1 whitespace-normal">
-                        <h4 class="font-bold text-coffeeDark leading-tight">Rahul Singh</h4>
-                        <p class="text-xs text-gray-500 mt-0.5 italic">"Vaad is a lifesaver, keep it up!"</p>
-                    </div>
+        // The default cards that MUST show up instantly
+        const DEFAULT_CARDS = `
+            <div class="glass-card shadow-sm rounded-2xl p-4 flex items-center gap-4 w-[300px] flex-shrink-0 border border-gray-200">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Rahul" class="w-14 h-14 rounded-full bg-coffeeLight p-1" alt="Avatar">
+                <div class="flex-1 whitespace-normal">
+                    <h4 class="font-bold text-coffeeDark leading-tight">Rahul Singh</h4>
+                    <p class="text-xs text-gray-500 mt-0.5 italic">"Vaad is a lifesaver, keep it up!"</p>
                 </div>
-                <div class="glass-card shadow-sm rounded-2xl p-4 flex items-center gap-4 w-[300px] flex-shrink-0 border border-gray-200">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Priya" class="w-14 h-14 rounded-full bg-coffeeLight p-1" alt="Avatar">
-                    <div class="flex-1 whitespace-normal">
-                        <h4 class="font-bold text-coffeeDark leading-tight">Priya M.</h4>
-                        <p class="text-xs text-gray-500 mt-0.5 italic">"Coffee for the Opentune dev! ☕"</p>
-                    </div>
+            </div>
+            <div class="glass-card shadow-sm rounded-2xl p-4 flex items-center gap-4 w-[300px] flex-shrink-0 border border-gray-200">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Priya" class="w-14 h-14 rounded-full bg-coffeeLight p-1" alt="Avatar">
+                <div class="flex-1 whitespace-normal">
+                    <h4 class="font-bold text-coffeeDark leading-tight">Priya M.</h4>
+                    <p class="text-xs text-gray-500 mt-0.5 italic">"Coffee for the Opentune dev! ☕"</p>
                 </div>
-                <div class="glass-card shadow-sm rounded-2xl p-4 flex items-center gap-4 w-[300px] flex-shrink-0 border border-accentBrand/20 bg-red-50/30">
-                    <div class="w-14 h-14 rounded-full bg-accentBrand text-white flex items-center justify-center text-xl font-bold shadow-inner">✨</div>
-                    <div class="flex-1 whitespace-normal">
-                        <h4 class="font-bold text-coffeeDark leading-tight">Your Name Here</h4>
-                        <p class="text-xs text-gray-500 mt-0.5 font-medium">Claim your spot on the wall!</p>
-                    </div>
+            </div>
+            <div class="glass-card shadow-sm rounded-2xl p-4 flex items-center gap-4 w-[300px] flex-shrink-0 border border-accentBrand/20 bg-red-50/30">
+                <div class="w-14 h-14 rounded-full bg-accentBrand text-white flex items-center justify-center text-xl font-bold shadow-inner">✨</div>
+                <div class="flex-1 whitespace-normal">
+                    <h4 class="font-bold text-coffeeDark leading-tight">Your Name Here</h4>
+                    <p class="text-xs text-gray-500 mt-0.5 font-medium">Claim your spot on the wall!</p>
                 </div>
+            </div>
+        `;
+
+        // Function to actually draw the cards on the screen
+        function renderWall(extraCards = '') {
+            const container = document.getElementById('marqueeContentContainer');
+            if (!container) return;
+            const fullContent = DEFAULT_CARDS + extraCards;
+            container.innerHTML = `
+                <div class="flex gap-6 pl-6">${fullContent}</div>
+                <div class="flex gap-6 pl-6">${fullContent}</div>
             `;
+        }
+
+        // A rock-solid CSV parser that won't freeze the browser
+        function parseCSVRow(str) {
+            let arr = [];
+            let quote = false;
+            let col = '';
+            for (let i = 0; i < str.length; i++) {
+                let cc = str[i], nc = str[i+1];
+                if (cc === '"' && quote && nc === '"') { col += cc; i++; continue; }
+                if (cc === '"') { quote = !quote; continue; }
+                if (cc === ',' && !quote) { arr.push(col); col = ''; continue; }
+                col += cc;
+            }
+            arr.push(col);
+            return arr;
+        }
+
+        async function loadLiveBackers() {
+            // 1. INSTANTLY render defaults so the user NEVER sees a blank screen
+            renderWall('');
 
             try {
-                // Fetch the Google Sheets CSV
-                const response = await fetch(CSV_URL + '&v=' + new Date().getTime());
-                if (response.ok) {
-                    const text = await response.text();
+                // 2. Fetch the live data in the background
+                const url = CSV_URL + '&v=' + new Date().getTime();
+                const response = await fetch(url);
+                if (!response.ok) return;
+
+                const text = await response.text();
+                const lines = text.split('\n').filter(line => line.trim().length > 0);
+                
+                if (lines.length < 2) return; // Only headers, no data yet
+
+                const headers = parseCSVRow(lines[0]).map(h => h.toLowerCase().trim());
+                const nameIdx = headers.findIndex(h => h.includes('name') || h.includes('display'));
+                const msgIdx = headers.findIndex(h => h.includes('message'));
+                const verIdx = headers.findIndex(h => h.includes('verified'));
+
+                let extraCards = '';
+
+                // Read the rows
+                for (let i = 1; i < lines.length; i++) {
+                    const row = parseCSVRow(lines[i]);
                     
-                    // Simple, fail-proof CSV parser
-                    const rows = text.split('\n').map(row => row.split(','));
-                    
-                    if (rows.length >= 2) {
-                        const headers = rows[0].map(h => h.toLowerCase());
-                        const nameIndex = headers.findIndex(h => h.includes('name') || h.includes('display'));
-                        const msgIndex = headers.findIndex(h => h.includes('message'));
-                        const verifiedIndex = headers.findIndex(h => h.includes('verified')); 
+                    const name = nameIdx > -1 && row[nameIdx] ? row[nameIdx].trim() : 'Anonymous';
+                    const message = msgIdx > -1 && row[msgIdx] ? row[msgIdx].trim() : 'Fueling the code! ☕';
+                    const verified = verIdx > -1 && row[verIdx] ? row[verIdx].trim().toUpperCase() : '';
 
-                        for (let i = 1; i < rows.length; i++) {
-                            const row = rows[i];
-                            if (!row || row.length < 2) continue;
-
-                            // Clean the text to prevent any broken formatting
-                            const name = nameIndex > -1 && row[nameIndex] ? row[nameIndex].replace(/["']/g, '').trim() : 'Anonymous';
-                            const message = msgIndex > -1 && row[msgIndex] ? row[msgIndex].replace(/["']/g, '').trim() : 'Fueling the code! ☕';
-                            const verified = verifiedIndex > -1 && row[verifiedIndex] ? row[verifiedIndex].replace(/["']/g, '').trim().toUpperCase() : '';
-
-                            // Only render if you typed YES
-                            if (verified === 'YES' && name) {
-                                const avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(name)}`;
-                                htmlContent += `
-                                <div class="glass-card shadow-sm rounded-2xl p-4 flex items-center gap-4 w-[300px] flex-shrink-0 border border-gray-200 transition-transform hover:scale-105">
-                                    <img src="${avatarUrl}" class="w-14 h-14 rounded-full bg-coffeeLight p-1" alt="Avatar">
-                                    <div class="flex-1 whitespace-normal">
-                                        <h4 class="font-bold text-coffeeDark leading-tight">${name}</h4>
-                                        <p class="text-xs text-gray-500 mt-0.5 italic">"${message}"</p>
-                                    </div>
-                                </div>
-                                `;
-                            }
-                        }
+                    if (verified === 'YES' && name) {
+                        const avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(name)}`;
+                        extraCards += `
+                        <div class="glass-card shadow-sm rounded-2xl p-4 flex items-center gap-4 w-[300px] flex-shrink-0 border border-gray-200 transition-transform hover:scale-105">
+                            <img src="${avatarUrl}" class="w-14 h-14 rounded-full bg-coffeeLight p-1" alt="Avatar">
+                            <div class="flex-1 whitespace-normal">
+                                <h4 class="font-bold text-coffeeDark leading-tight">${name}</h4>
+                                <p class="text-xs text-gray-500 mt-0.5 italic">"${message}"</p>
+                            </div>
+                        </div>
+                        `;
                     }
                 }
+
+                // 3. If we found real verified backers, update the wall to include them!
+                if (extraCards.length > 0) {
+                    renderWall(extraCards);
+                }
+
             } catch (error) {
-                console.error("Could not fetch Google Sheets data:", error);
-            } finally {
-                // Guaranteed Execution Failsafe:
-                // This ensures that even if Google Sheets goes offline, the default cards ALWAYS render.
-                const marqueeContainer = document.getElementById('marqueeContentContainer');
-                if(marqueeContainer) {
-                    marqueeContainer.innerHTML = `
-                        <div class="flex gap-6 pl-6">${htmlContent}</div>
-                        
+                console.error('Could not load live CSV, but default cards are safe:', error);
+            }
+        }
+
+        // Fire the function the second the page loads
+        window.addEventListener('DOMContentLoaded'
