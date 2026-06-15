@@ -219,7 +219,6 @@
 
             if (isMobile) {
                 window.location.href = upiString;
-                // Wait briefly, then show the "Did you pay?" prompt
                 setTimeout(() => { showConfirmationStep(); }, 3500); 
             } else {
                 const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiString)}`;
@@ -276,15 +275,13 @@
             `;
 
             try {
-                // Fetch the Google Sheets CSV with a cache buster
+                // Fetch the Google Sheets CSV
                 const response = await fetch(CSV_URL + '&v=' + new Date().getTime());
                 if (response.ok) {
-                    const data = await response.text();
-                    const rows = data.split('\n').map(row => {
-                        const matches = row.match(/(\s*"[^"]+"\s*|\s*[^,]+|,)(?=,|$)/g);
-                        if (!matches) return [];
-                        return matches.map(m => m.replace(/^,/, '').replace(/(^"|"$)/g, '').trim());
-                    });
+                    const text = await response.text();
+                    
+                    // Simple, fail-proof CSV parser
+                    const rows = text.split('\n').map(row => row.split(','));
                     
                     if (rows.length >= 2) {
                         const headers = rows[0].map(h => h.toLowerCase());
@@ -296,11 +293,12 @@
                             const row = rows[i];
                             if (!row || row.length < 2) continue;
 
-                            const name = row[nameIndex] ? row[nameIndex] : 'Anonymous';
-                            const message = row[msgIndex] ? row[msgIndex] : 'Fueling the code! ☕';
-                            const verified = verifiedIndex > -1 && row[verifiedIndex] ? row[verifiedIndex].toUpperCase() : '';
+                            // Clean the text to prevent any broken formatting
+                            const name = nameIndex > -1 && row[nameIndex] ? row[nameIndex].replace(/["']/g, '').trim() : 'Anonymous';
+                            const message = msgIndex > -1 && row[msgIndex] ? row[msgIndex].replace(/["']/g, '').trim() : 'Fueling the code! ☕';
+                            const verified = verifiedIndex > -1 && row[verifiedIndex] ? row[verifiedIndex].replace(/["']/g, '').trim().toUpperCase() : '';
 
-                            // Append real backers right after the default ones
+                            // Only render if you typed YES
                             if (verified === 'YES' && name) {
                                 const avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(name)}`;
                                 htmlContent += `
@@ -317,15 +315,12 @@
                     }
                 }
             } catch (error) {
-                console.error("Error fetching live backers:", error);
-            }
-
-            // Always render the final compiled list (Defaults + Real Backers)
-            renderMarquee(htmlContent);
-        }
-
-        function renderMarquee(content) {
-            const marqueeContainer = document.getElementById('marqueeContentContainer');
-            marqueeContainer.innerHTML = `
-                <div class="flex gap-6 pl-6">${content}</div>
-  
+                console.error("Could not fetch Google Sheets data:", error);
+            } finally {
+                // Guaranteed Execution Failsafe:
+                // This ensures that even if Google Sheets goes offline, the default cards ALWAYS render.
+                const marqueeContainer = document.getElementById('marqueeContentContainer');
+                if(marqueeContainer) {
+                    marqueeContainer.innerHTML = `
+                        <div class="flex gap-6 pl-6">${htmlContent}</div>
+                        
