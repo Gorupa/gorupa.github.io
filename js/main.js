@@ -65,6 +65,14 @@ const myProjects = [
     },
     {
         category: "browser",
+        icon: "auto_awesome",
+        title: "Astra",
+        desc: "A minimalist numerology and astrological reading platform. No spam, no recharge pop-ups, no chaotic live chats—just clean, genuine, and math-driven insights.",
+        tags: ["Astrology", "Numerology", "Utility"],
+        liveLink: "https://astra-e8k.pages.dev/"
+    },
+    {
+        category: "browser",
         icon: "payments",
         title: "ClearFin",
         desc: "A minimalist, privacy-first personal finance dashboard. Keep your financial data clear, accessible, and entirely under your own control.",
@@ -168,6 +176,11 @@ function renderProjects() {
     const libraryContainer = document.getElementById('libraries');
     const studentContainer = document.getElementById('student-projects');
 
+    // Clear existing content to prevent duplicates if called multiple times
+    if(browserContainer) browserContainer.innerHTML = '';
+    if(libraryContainer) libraryContainer.innerHTML = '';
+    if(studentContainer) studentContainer.innerHTML = '';
+
     myProjects.forEach(proj => {
         const tagsHtml = proj.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
         
@@ -199,11 +212,11 @@ function renderProjects() {
         </article>
         `;
         
-        if (proj.category === 'student') {
+        if (proj.category === 'student' && studentContainer) {
             studentContainer.innerHTML += cardHtml;
-        } else if (proj.category === 'library') {
+        } else if (proj.category === 'library' && libraryContainer) {
             libraryContainer.innerHTML += cardHtml;
-        } else {
+        } else if (browserContainer) {
             browserContainer.innerHTML += cardHtml;
         }
     });
