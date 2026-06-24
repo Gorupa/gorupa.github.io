@@ -94,12 +94,48 @@
         }
         .btn-primary:hover { opacity: 0.9; }
 
+        .btn-secondary {
+            width: 100%;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 16px;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s;
+        }
+        .btn-secondary:hover { background: var(--border); }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--text-muted);
+            font-family: 'DM Mono', monospace;
+            font-size: 0.85rem;
+            margin: 20px 0;
+        }
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid var(--border);
+        }
+        .divider span {
+            padding: 0 10px;
+        }
+
         .security-note {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 6px;
-            margin-top: 16px;
+            margin-top: 20px;
             font-size: 0.8rem;
             color: var(--text-muted);
             font-family: 'DM Mono', monospace;
@@ -162,7 +198,7 @@
             height: 48px;
             border-radius: 50%;
             border: 1px solid var(--border);
-            filter: grayscale(100%); /* Fits the editorial theme */
+            filter: grayscale(100%); 
         }
 
         .backer-info h4 {
@@ -245,19 +281,6 @@
             gap: 12px;
             margin-top: 24px;
         }
-
-        .btn-secondary {
-            flex: 1;
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--text-main);
-            padding: 14px;
-            cursor: pointer;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-        .btn-secondary:hover { background: var(--border); }
     </style>
 </head>
 <body>
@@ -307,14 +330,25 @@
                 <input type="number" id="customAmount" value="150" class="custom-input" placeholder="Custom Amount">
             </div>
 
-            <button onclick="processPayment()" class="btn-primary">
-                <span class="material-icons-round">bolt</span>
-                Send Support via UPI
-            </button>
+            <div class="payment-methods">
+                <button onclick="processPayment()" class="btn-primary">
+                    <span class="material-icons-round">bolt</span>
+                    Support via UPI (India)
+                </button>
+                
+                <div class="divider">
+                    <span>or</span>
+                </div>
+
+                <button onclick="processPayPal()" class="btn-secondary">
+                    <span class="material-icons-round">public</span>
+                    Support via PayPal (Global)
+                </button>
+            </div>
             
             <div class="security-note">
                 <span class="material-icons-round" style="font-size: 14px;">lock</span>
-                Encrypted via Native UPI
+                Encrypted & Secure Payments
             </div>
         </div>
     </section>
@@ -370,7 +404,7 @@
         <button onclick="closeModals()" class="close-btn"><span class="material-icons-round">close</span></button>
         <span class="material-icons-round" style="font-size: 3rem; color: var(--text-main); margin-bottom: 16px;">check_circle</span>
         <h3 class="modal-title">You're a Legend!</h3>
-        <p class="bio" style="font-size: 0.95rem; margin-bottom: 24px;">Your support means everything. Provide your UTR number and a message to claim your brick on the wall.</p>
+        <p class="bio" style="font-size: 0.95rem; margin-bottom: 24px;">Your support means everything. Provide your transaction details and a message to claim your brick on the wall.</p>
         
         <a href="https://forms.gle/7XbQynseoybTtQaF9" target="_blank" onclick="closeModals()" class="btn-primary" style="text-decoration: none;">
             Claim Your Brick <span class="material-icons-round" style="font-size: 18px;">edit_document</span>
@@ -403,6 +437,7 @@
     // --- Payment Routing Engine ---
     const UPI_ID = "7339992788@upi"; 
     const PAYEE_NAME = "Code And Coffee"; 
+    const PAYPAL_LINK = "https://paypal.me/GKalal163";
 
     function setAmount(amt, btnElement) {
         document.getElementById('customAmount').value = amt;
@@ -430,6 +465,23 @@
             document.getElementById('qrCodeImage').src = qrApiUrl;
             document.getElementById('desktopModal').classList.add('active');
         }
+    }
+
+    function processPayPal() {
+        const amount = document.getElementById('customAmount').value;
+        if(!amount || amount < 10) {
+            alert("Please enter a valid amount (Minimum ₹10).");
+            return;
+        }
+        
+        // Open PayPal me link with the specified amount appended
+        const paypalUrl = `${PAYPAL_LINK}/${amount}`;
+        window.open(paypalUrl, '_blank');
+        
+        // Give them a moment to complete the transaction, then show the claim form
+        setTimeout(() => {
+            triggerVerificationStep();
+        }, 4000);
     }
 
     function showConfirmationStep() {
@@ -497,4 +549,4 @@
 </script>
 
 </body>
-    </html>
+</html>
