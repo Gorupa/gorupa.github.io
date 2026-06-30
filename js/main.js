@@ -26,6 +26,15 @@ function updateThemeIcon(theme) {
 const myProjects = [
     {
         category: "library",
+        icon: "dark_mode",
+        title: "Noir UI",
+        desc: "Where the web gets serious. A dark editorial design system for agencies, portfolios, and SaaS builders who want their work to command attention — not blend in.",
+        tags: ["CSS", "Design System", "Dark Mode"],
+        liveLink: "https://noir-ui-kit.pages.dev/",
+        codeLink: "https://github.com/Gorupa/noir-ui-kit"
+    },
+    {
+        category: "library",
         icon: "palette",
         title: "KABOOM! UI",
         desc: "KABOOM! UI is a purely nostalgic, 100% CSS design system ripped straight from the pages of vintage comic books, Pop Art posters, and the gloriously chaotic 90s. No frameworks. No dependencies. No apologies. Just raw, inky, halftone-dotted style.",
