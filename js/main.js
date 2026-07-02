@@ -74,6 +74,14 @@ const myProjects = [
     },
     {
         category: "browser",
+        icon: "shield",
+        title: "SigVerify",
+        desc: "A powerful tool to verify eSigns and digital signatures. Upload a signed PDF and get a complete cryptographic report — signer identity, certificate chain, timestamp, tamper detection, and CA trust level.",
+        tags: ["Security", "Cryptography", "Premium"],
+        liveLink: "https://sigverify.pages.dev/"
+    },
+    {
+        category: "browser",
         icon: "auto_awesome",
         title: "Astra",
         desc: "A minimalist numerology and astrological reading platform. No spam, no recharge pop-ups, no chaotic live chats—just clean, genuine, and math-driven insights.",
