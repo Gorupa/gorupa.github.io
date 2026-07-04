@@ -29,7 +29,7 @@ const myProjects = [
         icon: "dark_mode",
         title: "Noir UI",
         desc: "Where the web gets serious. A dark editorial design system for agencies, portfolios, and SaaS builders who want their work to command attention — not blend in.",
-        tags: ["CSS", "Design System", "Dark Mode"],
+        tags: ["CSS", "Design System", "Premium"],
         liveLink: "https://noir-ui-kit.pages.dev/",
         codeLink: "https://github.com/Gorupa/noir-ui-kit"
     },
@@ -38,7 +38,7 @@ const myProjects = [
         icon: "palette",
         title: "KABOOM! UI",
         desc: "KABOOM! UI is a purely nostalgic, 100% CSS design system ripped straight from the pages of vintage comic books, Pop Art posters, and the gloriously chaotic 90s. No frameworks. No dependencies. No apologies. Just raw, inky, halftone-dotted style.",
-        tags: ["CSS", "UI Kit", "Design System"],
+        tags: ["CSS", "UI Kit", "Premium"],
         liveLink: "https://kaboom-ui-kit.pages.dev/",
         codeLink: "https://github.com/Gorupa/kaboom-ui-kit",
         articleLink: "https://dev.to/gorupa/i-was-tired-of-boring-uis-so-i-built-a-css-framework-straight-out-of-a-1962-comic-book-mc1"
@@ -77,15 +77,16 @@ const myProjects = [
         icon: "shield",
         title: "SigVerify",
         desc: "A powerful tool to verify eSigns and digital signatures. Upload a signed PDF and get a complete cryptographic report — signer identity, certificate chain, timestamp, tamper detection, and CA trust level.",
-        tags: ["Security", "Cryptography", "Premium"],
-        liveLink: "https://sigverify.pages.dev/"
+        tags: ["Python", "Cryptography", "Premium"],
+        liveLink: "https://sigverify.pages.dev/",
+        articleLink: "https://dev.to/gorupa/i-built-a-free-tool-to-verify-aadhaar-esign-pdfs-heres-why-it-matters-2950"
     },
     {
         category: "browser",
         icon: "auto_awesome",
         title: "Astra",
         desc: "A minimalist numerology and astrological reading platform. No spam, no recharge pop-ups, no chaotic live chats—just clean, genuine, and math-driven insights.",
-        tags: ["Astrology", "Numerology", "Utility"],
+        tags: ["Astrology", "Numerology", "Premium"],
         liveLink: "https://astra-e8k.pages.dev/"
     },
     {
@@ -136,7 +137,7 @@ const myProjects = [
         icon: "gavel",
         title: "Vaad",
         desc: "Track Indian court cases instantly. Search by CNR number, party name or advocate name. Clean results, next hearing date front and centre. Free, no ads, open source.",
-        tags: ["Legal Tech", "Court Tracker", "Open Source"],
+        tags: ["Legal Tech", "Court Tracker", "Premium"],
         liveLink: "https://vaad.pages.dev/",
         codeLink: "https://github.com/Gorupa/vaad"
     },
@@ -199,7 +200,11 @@ function renderProjects() {
     if(studentContainer) studentContainer.innerHTML = '';
 
     myProjects.forEach(proj => {
-        const tagsHtml = proj.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+        const tagsHtml = proj.tags.map(tag => {
+            // Apply special styling to the Premium tag if desired, or let CSS handle it
+            const premiumClass = tag === 'Premium' ? 'tag-premium' : '';
+            return `<span class="tag ${premiumClass}">${tag}</span>`;
+        }).join('');
         
         // Dynamically build links based on what is provided
         let linksHtml = '';
