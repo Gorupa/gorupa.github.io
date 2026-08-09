@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gaurav Kalal — Open Source</title>
     <meta name="description" content="Building privacy-first consumer tools and pioneering developer libraries.">
+    
+    <!-- Prevents the browser from requesting a favicon -->
+    <link rel="icon" href="data:,">
+    
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Newsreader:opsz,ital,wght@6..72,1,400;6..72,0,500;6..72,0,600;6..72,1,500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
@@ -17,10 +21,9 @@
     <header class="header">
         <div class="brand">Gaurav Kalal</div>
         <div class="header-actions">
-            <div class="mode-toggle">
-                <button class="mode-btn active">Personal</button>
-                <button class="mode-btn" onclick="window.location.href='https://gorupa.github.io/Raghav-Communication/#'">Business</button>
-            </div>
+            <!-- Minimalist Business Link -->
+            <a href="https://gorupa.github.io/Raghav-Communication/#" class="minimal-btn">Go to Business Portfolio ↗</a>
+            
             <button id="theme-toggle" class="icon-btn" aria-label="Toggle Theme">
                 <span class="material-icons-round" id="theme-icon">dark_mode</span>
             </button>
