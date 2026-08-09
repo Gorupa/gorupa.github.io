@@ -223,3 +223,48 @@ body {
     .manifesto { font-size: 2.2rem; }
     .footer { flex-direction: column; gap: 8px; }
 }
+
+/* ============================================
+   Mode Toggle (Personal / Business)
+   ============================================ */
+.mode-toggle {
+    display: flex;
+    background: var(--accent-bg);
+    border-radius: 24px;
+    padding: 4px;
+    gap: 4px;
+    margin-right: 16px;
+}
+
+.mode-btn {
+    background: transparent;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.mode-btn:hover {
+    color: var(--text-main);
+}
+
+.mode-btn.active {
+    background: var(--bg);
+    color: var(--text-main);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+[data-theme="dark"] .mode-btn.active {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+@media (max-width: 600px) {
+    .mode-toggle {
+        display: none;
+    }
+}
