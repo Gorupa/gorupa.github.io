@@ -79,7 +79,8 @@ const myProjects = [
         desc: "A powerful tool to verify eSigns and digital signatures. Upload a signed PDF and get a complete cryptographic report — signer identity, certificate chain, timestamp, tamper detection, and CA trust level.",
         tags: ["Python", "Cryptography", "Premium"],
         liveLink: "https://sigverify.pages.dev/",
-        articleLink: "https://dev.to/gorupa/i-built-a-free-tool-to-verify-aadhaar-esign-pdfs-heres-why-it-matters-2950"
+        articleLink: "https://dev.to/gorupa/i-built-a-free-tool-to-verify-aadhaar-esign-pdfs-heres-why-it-matters-2950",
+        playStoreLink: "https://play.google.com/store/apps/details?id=com.gorupa.sigverify"
     },
     {
         category: "browser",
@@ -210,6 +211,9 @@ function renderProjects() {
         let linksHtml = '';
         if (proj.liveLink) {
             linksHtml += `<a href="${proj.liveLink}" target="_blank" rel="noopener">Live Demo <span class="material-icons-round">north_east</span></a>`;
+        }
+        if (proj.playStoreLink) {
+            linksHtml += `<a href="${proj.playStoreLink}" target="_blank" rel="noopener">Play Store <span class="material-icons-round">shop</span></a>`;
         }
         if (proj.articleLink) {
             linksHtml += `<a href="${proj.articleLink}" target="_blank" rel="noopener">Read Article <span class="material-icons-round">article</span></a>`;
