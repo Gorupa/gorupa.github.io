@@ -110,9 +110,10 @@ const myProjects = [
         category: "browser",
         icon: "calculate",
         title: "Smart Calc",
-        desc: "A human-centric, offline-first EMI and standard calculator built with radical transparency.",
-        tags: ["Calculator", "Offline-First", "Utility"],
+        desc: "An ad-free, human-centric, offline-first EMI and standard calculator built with radical transparency. Plan finances or split everyday bills with private calculations that work without an internet connection.",
+        tags: ["Calculator", "Offline-First", "Ad-Free"],
         liveLink: "https://gorupa.github.io/smart-calc/",
+        playStoreLink: "https://play.google.com/store/apps/details?id=com.gorupa.smartcalc",
         codeLink: "https://github.com/Gorupa/smart-calc"
     },
     {
